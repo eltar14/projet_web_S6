@@ -2,6 +2,19 @@
 #        Script MySQL.
 #------------------------------------------------------------
 
+DROP TABLE IF EXISTS arbre;
+DROP TABLE IF EXISTS quartier;
+DROP TABLE IF EXISTS secteur;
+DROP TABLE IF EXISTS etat;
+DROP TABLE IF EXISTS stadedev;
+DROP TABLE IF EXISTS port;
+DROP TABLE IF EXISTS pied;
+DROP TABLE IF EXISTS situation;
+DROP TABLE IF EXISTS nomtech;
+DROP TABLE IF EXISTS villeca;
+DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS role_user;
+DROP TABLE IF EXISTS feuillage;
 
 #------------------------------------------------------------
 # Table: secteur
@@ -156,11 +169,10 @@ CREATE TABLE arbre(
         haut_tot     Int NOT NULL ,
         haut_tronc   Int NOT NULL ,
         tronc_diam   Int NOT NULL ,
-        revetement   Bool NOT NULL ,
+        revetement   Varchar (80) NOT NULL ,
         age_estim    Int ,
-        prec_estim   Int NOT NULL ,
         clc_nbr_diag Int NOT NULL ,
-        remarquable  Bool NOT NULL ,
+        remarquable  Varchar (80) NOT NULL ,
         id_etat      Int NOT NULL ,
         id_stadedev  Int NOT NULL ,
         id_port      Int NOT NULL ,
