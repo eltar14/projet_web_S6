@@ -11,7 +11,7 @@ $footer = "
     <div class='footer_main'>
         <div class='footer_grid'>
             <div class='footer_logo'>
-                <img src='../views/img/la_patate_hoteliere.png' width='400em'>
+                <img src='../views/img/logo.png' width='100em'>
             </div>
             <div class='footer_nav'>
                 <div class='footer_socials'>
@@ -36,15 +36,15 @@ $footer = "
 
                     <ul>
                         <li>
-                            <a href='press.php'>Espace presse</a>
+                            <a href='#'>Espace presse</a>
 
                         </li>
                         <li>
-                            <a href='contact.php'>Nous contacter</a>
+                            <a href='#'>Nous contacter</a>
 
                         </li>
                         <li>
-                            <a href='news.php'>Actualités</a>
+                            <a href='#'>Actualités</a>
 
                         </li>
 
@@ -61,16 +61,16 @@ $footer = "
                     ©2023 CIR26C
                 </li>
                 <li>
-                    <a href='legal.php'>Mentions légales</a>
+                    <a href='#'>Mentions légales</a>
                 </li>
                 <li>
-                    <a href='cgu.php'>CGU</a>
+                    <a href='#'>CGU</a>
                 </li>
                 <li>
-                    <a href='ppd.php'>Politique de protection des données</a>
+                    <a href='#'>Politique de protection des données</a>
                 </li>
                 <li>
-                    <a href='cookies.php'>Politique de gestion des cookies</a>
+                    <a href='#'>Politique de gestion des cookies</a>
                 </li>
             </ul>
         </div>
