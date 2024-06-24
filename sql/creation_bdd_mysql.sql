@@ -16,6 +16,7 @@ DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS role_user;
 DROP TABLE IF EXISTS feuillage;
 
+
 #------------------------------------------------------------
 # Table: secteur
 #------------------------------------------------------------
@@ -171,7 +172,7 @@ CREATE TABLE arbre(
                       tronc_diam   Int NOT NULL ,
                       revetement   Bool NOT NULL ,
                       age_estim    Int ,
-                      prec_estim   Int NOT NULL ,
+                      prec_estim   Int ,
                       clc_nbr_diag Int NOT NULL ,
                       remarquable  Bool NOT NULL ,
                       id_etat      Int NOT NULL ,
@@ -197,4 +198,3 @@ CREATE TABLE arbre(
     ,CONSTRAINT arbre_secteur7_FK FOREIGN KEY (id_secteur) REFERENCES secteur(id_secteur)
     ,CONSTRAINT arbre_feuillage8_FK FOREIGN KEY (id_feuillage) REFERENCES feuillage(id_feuillage)
 )ENGINE=InnoDB;
-
