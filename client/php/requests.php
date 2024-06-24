@@ -1,0 +1,48 @@
+<?php
+require_once('../../DB.php');
+
+// Connection to the database
+$db = DB::connexion();
+if (!$db)
+{
+    header('HTTP/1.1 503 Service Unavailable');
+    exit;
+}
+
+$requestMethod = $_SERVER['REQUEST_METHOD'];
+$request = substr($_SERVER['PATH_INFO'], 1);
+$request = explode('/', $request);
+$requestRessource = array_shift($request);
+//echo $requestRessource;
+
+switch ($requestMethod){
+    case "GET":
+        get($db, $requestRessource);
+    case "POST":
+        post($db, $requestRessource);
+    case "PUT":
+        put($db, $requestRessource);
+    case "DELETE":
+        delete($db, $requestRessource, $request);
+}
+
+
+
+// ========= GET ==========
+
+function get($db, $requestRessource)
+{
+    if($requestRessource == 'connect_user') {
+        $user_email =  $_GET["user_email"];
+        $user_password = $_GET["user_password"];
+
+    }
+
+}
+
+
+// ========= POST ==========
+
+// ========= PUT ==========
+
+// ========= DELETE ==========
