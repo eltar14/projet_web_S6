@@ -12,7 +12,7 @@ class DB {
 
         try {
             $db = new PDO(
-                "pgsql:dbname=".DB_NAME.";host=".DB_SERVER.";port=".DB_PORT,
+                "mysql:dbname=".DB_NAME.";host=".DB_SERVER.";port=".DB_PORT,
                 DB_USER,
                 DB_PASSWORD);
         }

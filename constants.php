@@ -1,9 +1,9 @@
 <?php
 
 // Database constants.
-const DB_USER = 'xxxx';
-const DB_PASSWORD = 'xxxx';
-const DB_NAME = 'xxxx';
-const DB_SERVER = '123.456.78.90';
-const DB_PORT = '5432';
+const DB_USER = 'etu1108';
+const DB_PASSWORD = 'qgpsvtjv';
+const DB_NAME = 'etu1108';
+const DB_SERVER = 'localhost';
+const DB_PORT = '3306';
 ?>

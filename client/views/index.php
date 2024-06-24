@@ -43,10 +43,9 @@
 
 
 </body>
-<div id="id_user" style="display: none">None</div>
 <?=$footer?>
 
-<script rel="script" src="../js/ajax.js.js"></script>
+<script rel="script" src="../js/ajax.js"></script>
 <script rel="script" src="../js/script.js"></script>
 
 </html>

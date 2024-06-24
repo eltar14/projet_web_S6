@@ -10,7 +10,7 @@ $navbar = '
 
         <div class="nav-right">
             <a href="'.$site_root.'/controllers/#">Carte</a>
-            <a href="'.$site_root.'/controllers/#">AAAA</a>
+            <a href="'.$site_root.'/controllers/add_tree.php">Ajouter arbre</a>
             <a href="'.$site_root.'/controllers/#">BBBB</a>
 <!-- <a href="'.$site_root.'/controllers/#" class="disconnect">Disconnect</a> -->
                  <button id="open-button" onclick="openForm()">Connexion</button>
@@ -18,6 +18,9 @@ $navbar = '
                             <div class="form-popup" id="myForm">
                                 <form action="" class="form-container">
                                     <h1>Login</h1>
+                                    <div id="incorrect_login" style="display: none; color: red;">
+                                        Incorrect username or password.
+                                    </div>
                         
                                     <label for="email"><b>Email</b></label>
                                     <input id="login_email" type="text" placeholder="Enter Email" name="email" required>

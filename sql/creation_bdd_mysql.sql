@@ -125,7 +125,9 @@ CREATE TABLE user(
         nom_user      Varchar (80) NOT NULL ,
         prenom_user   Varchar (80) NOT NULL ,
         password_user Varchar (80) NOT NULL ,
+        email_user    Varchar (256) NOT NULL ,
         id_role_user  Int NOT NULL
+	,CONSTRAINT user_AK UNIQUE (email_user)
 	,CONSTRAINT user_PK PRIMARY KEY (id_user)
 
 	,CONSTRAINT user_role_user_FK FOREIGN KEY (id_role_user) REFERENCES role_user(id_role_user)
