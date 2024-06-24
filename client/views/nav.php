@@ -1,5 +1,5 @@
 <?php
-$site_root = '/projet_web_S6/client';
+$site_root = '/client';
 
 $navbar = '
 <section>

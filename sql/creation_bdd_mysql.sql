@@ -133,6 +133,17 @@ CREATE TABLE user(
 
 
 #------------------------------------------------------------
+# Table: feuillage
+#------------------------------------------------------------
+
+CREATE TABLE feuillage(
+        id_feuillage Int  Auto_increment  NOT NULL ,
+        feuillage    Varchar (80) NOT NULL
+	,CONSTRAINT feuillage_PK PRIMARY KEY (id_feuillage)
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
 # Table: arbre
 #------------------------------------------------------------
 
@@ -156,7 +167,8 @@ CREATE TABLE arbre(
         id_nomtech   Int NOT NULL ,
         id_villeca   Int NOT NULL ,
         id_user      Int ,
-        id_secteur   Int NOT NULL
+        id_secteur   Int NOT NULL ,
+        id_feuillage Int NOT NULL
 	,CONSTRAINT arbre_PK PRIMARY KEY (id_arbre)
 
 	,CONSTRAINT arbre_etat_FK FOREIGN KEY (id_etat) REFERENCES etat(id_etat)
@@ -168,5 +180,6 @@ CREATE TABLE arbre(
 	,CONSTRAINT arbre_villeca5_FK FOREIGN KEY (id_villeca) REFERENCES villeca(id_villeca)
 	,CONSTRAINT arbre_user6_FK FOREIGN KEY (id_user) REFERENCES user(id_user)
 	,CONSTRAINT arbre_secteur7_FK FOREIGN KEY (id_secteur) REFERENCES secteur(id_secteur)
+	,CONSTRAINT arbre_feuillage8_FK FOREIGN KEY (id_feuillage) REFERENCES feuillage(id_feuillage)
 )ENGINE=InnoDB;
 
