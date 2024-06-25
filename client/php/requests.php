@@ -2,6 +2,8 @@
 require_once('../../DB.php');
 
 require_once ('User.php');
+require_once ('Stadedev.php');
+
 
 // Connection to the database
 $db = DB::connexion();
@@ -40,6 +42,10 @@ function get($db, $requestRessource)
         $user_password = $_GET["user_password"];
         $data = User::authenticate($user_email, $user_password);
 
+    }elseif($requestRessource == 'get_lines_substr_in_stadedev') {
+        $substring = $_GET["substring"];
+        error_log($substring);
+        $data = Stadedev::get_lines_substr_in_stadedev($substring);
     }
 
     // Envoi de la réponse au client.

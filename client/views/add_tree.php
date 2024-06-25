@@ -118,6 +118,17 @@
         </form>
     </div>
 </section>
+
+<section class="main_content">
+    <p>
+        bouton test ajax vers console
+    </p>
+    <p>
+        <label for="testAjaxTxtInput">Test substr :</label>
+        <input type="text" id="testAjaxTxtInput" name="testAjaxTxtInput" required>
+    </p>
+    <button id="testAjaxBtn">AJAX TEST</button>
+</section>
 </body>
 <?=$footer?>
 
