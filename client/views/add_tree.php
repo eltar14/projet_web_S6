@@ -16,119 +16,149 @@
 <section class="main_content">
     <h1>Ajout d'un arbre dans la base de données</h1>
     <div>
-        <form action="" method="">
-            <p>
+        <form autocomplete="off">
+
+            <div style="display: flex">
                 <label for="longitude">Longitude :</label>
-                <input type="number" id="longitude" name="longitude" required>
-            </p>
+                <div class="autocomplete" style="width:450px; margin-bottom:1em">
+                    <input type="number" id="longitude" name="longitude" required>
+                </div>
+            </div>
 
-            <p>
+            <div style="display: flex">
                 <label for="latitude">Latitude :</label>
-                <input type="number" id="latitude" name="latitude" required>
-            </p>
+                <div class="autocomplete" style="width:450px; margin-bottom:1em">
+                    <input type="number" id="latitude" name="latitude" required>
+                </div>
+            </div>
 
-            <p>
+            <div style="display: flex">
                 <label for="haut_tot">Hauteur totale (en mètres) :</label>
-                <input type="number" id="haut_tot" name="haut_tot" required>
-            </p>
+                <div class="autocomplete" style="width:450px; margin-bottom:1em">
+                    <input type="number" id="haut_tot" name="haut_tot" required>
+                </div>
+            </div>
 
-            <p>
+            <div style="display: flex">
                 <label for="haut_tronc">Hauteur du tronc (en mètres) :</label>
-                <input type="number" id="haut_tronc" name="haut_tronc" required>
-            </p>
+                <div class="autocomplete" style="width:450px; margin-bottom:1em">
+                    <input type="number" id="haut_tronc" name="haut_tronc" required>
+                </div>
+            </div>
 
-            <p>
+            <div style="display: flex">
                 <label for="tronc_diam">Diamètre du tronc (en cm) :</label>
-                <input type="number" id="tronc_diam" name="tronc_diam" required>
-            </p>
+                <div class="autocomplete" style="width:450px; margin-bottom:1em">
+                    <input type="number" id="tronc_diam" name="tronc_diam" required>
+                </div>
+            </div>
 
-            <p>
+
+            <div style="display: flex">
                 <label for="revetement">Revêtement :</label>
-                <input type="checkbox" id="revetement" name="revetement">
-            </p>
+                <div class="autocomplete" style="width:450px; margin-bottom:1em">
+                    <input type="checkbox" id="revetement" name="revetement">
+                </div>
+            </div>
 
-<!--            <p>-->
+<!--            <div class="autocomplete" style="width:450px; margin-bottom:1em">-->
 <!--                <label for="age_estim">Age estimé :</label>-->
 <!--                <input type="number" id="age_estim" name="age_estim" required>-->
-<!--            </p>-->
-
-            <p>
+<!--            </div>-->
+            <div style="display: flex">
                 <label for="prec_estim">Précision estimée :</label>
-                <input type="number" id="prec_estim" name="prec_estim" required>
-            </p>
+                <div class="autocomplete" style="width:450px; margin-bottom:1em">
+                    <input type="number" id="prec_estim" name="prec_estim" required>
+                </div>
+            </div>
 
-            <p>
+            <div style="display: flex">
                 <label for="clc_nbr_diag">Nombre de diags ? :</label>
-                <input type="number" id="clc_nbr_diag" name="clc_nbr_diag" required>
-            </p>
+                <div class="autocomplete" style="width:450px; margin-bottom:1em">
 
-            <p>
+                    <input type="number" id="clc_nbr_diag" name="clc_nbr_diag" required>
+                </div>
+            </div>
+
+            <div style="display: flex">
                 <label for="remarquable">Remarquable :</label>
-                <input type="checkbox" id="remarquable" name="remarquable">
-            </p>
+                <div class="autocomplete" style="width:450px; margin-bottom:1em">
+                    <input type="checkbox" id="remarquable" name="remarquable">
+                </div>
+            </div>
 
-            <p>
+
+
+            <div style="display: flex">
                 <label for="etat">État :</label>
-                <input type="text" id="etat" name="etat" required>
-            </p>
+                <div class="autocomplete" style="width:450px; margin-bottom:1em">
+                    <input type="text" id="etat" name="etat" required>
+                </div>
+            </div>
 
-            <p>
+            <div style="display: flex">
                 <label for="stadedev">Stade de Développement :</label>
-                <input type="text" id="stadedev" name="stadedev" required>
-            </p>
+                <div class="autocomplete" style="width:450px; margin-bottom:1em">
+                    <input type="text" id="stadedev" name="stadedev" required>
+                </div>
+            </div>
 
-            <p>
+            <div style="display: flex">
                 <label for="port">Port :</label>
-                <input type="text" id="port" name="port" required>
-            </p>
+                <div class="autocomplete" style="width:450px; margin-bottom:1em">
+                    <input type="text" id="port" name="port" required>
+                </div>
+            </div>
 
-            <p>
+            <div style="display: flex">
                 <label for="pied">Pied :</label>
-                <input type="text" id="pied" name="pied" required>
-            </p>
+                <div class="autocomplete" style="width:450px; margin-bottom:1em">
+                    <input type="text" id="pied" name="pied" required>
+                </div>
+            </div>
 
-            <p>
+            <div style="display: flex">
                 <label for="situation">Situation :</label>
-                <input type="text" id="situation" name="situation" required>
-            </p>
+                <div class="autocomplete" style="width:450px; margin-bottom:1em">
+                    <input type="text" id="situation" name="situation" required>
+                </div>
+            </div>
 
-            <p>
+            <div style="display: flex">
                 <label for="nomtech">Nom Technique :</label>
-                <input type="text" id="nomtech" name="nomtech" required>
-            </p>
+                <div class="autocomplete" style="width:450px; margin-bottom:1em">
+                    <input type="text" id="nomtech" name="nomtech" required>
+                </div>
+            </div>
 
-            <p>
+            <div style="display: flex">
                 <label for="villeca">Ville :</label>
-                <input type="text" id="villeca" name="villeca" required>
-            </p>
+                <div class="autocomplete" style="width:450px; margin-bottom:1em">
+                    <input type="text" id="villeca" name="villeca" required>
+                </div>
+            </div>
 
-            <p>
+            <div style="display: flex">
                 <label for="secteur">Secteur :</label>
-                <input type="text" id="secteur" name="secteur" required>
-            </p>
+                <div class="autocomplete" style="width:450px; margin-bottom:1em">
+                    <input type="text" id="secteur" name="secteur" required>
+                </div>
+            </div>
 
-            <p>
+            <div style="display: flex">
                 <label for="feuillage">Feuillage :</label>
-                <input type="text" id="feuillage" name="feuillage" required>
-            </p>
+                <div class="autocomplete" style="width:450px; margin-bottom:1em">
+                    <input type="text" id="feuillage" name="feuillage" required>
+                </div>
+            </div>
 
-            <p>
+            <div style="margin-bottom:1em">
                 <button type="submit">Ajouter l'Arbre</button>
-            </p>
+            </div>
         </form>
     </div>
 </section>
 
-<section class="main_content">
-    <p>
-        bouton test ajax vers console
-    </p>
-    <p>
-        <label for="testAjaxTxtInput">Test substr :</label>
-        <input type="text" id="testAjaxTxtInput" name="testAjaxTxtInput" required>
-    </p>
-    <button id="testAjaxBtn">AJAX TEST</button>
-</section>
 </body>
 <?=$footer?>
 

@@ -1,18 +1,19 @@
 <?php
 require_once '../../DB.php';
-class Stadedev
+
+class Pied
 {
-    static function get_lines_substr_in_stadedev($substring)
+    static function get_lines_substr_in_pied($substring)
         /**
          * Pour autocompletion var categorielle ajout arbre
-         * retourne les stadedev qui contiennent la substring
+         * retourne les pied qui contiennent la substring
          */
     {
         $db = DB::connexion();
 
         $request = "
-            SELECT stadedev FROM stadedev
-        WHERE LOWER(stadedev) LIKE LOWER(concat('%', :substring, '%'))
+            SELECT pied FROM pied
+        WHERE LOWER(pied) LIKE LOWER(concat('%', :substring, '%'))
             ";
 
         $statement = $db->prepare($request);
@@ -21,4 +22,6 @@ class Stadedev
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_COLUMN);
     }
+
+
 }

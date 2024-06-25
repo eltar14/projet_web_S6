@@ -1,18 +1,18 @@
 <?php
 require_once '../../DB.php';
-class Stadedev
+class Etat
 {
-    static function get_lines_substr_in_stadedev($substring)
+    static function get_lines_substr_in_etat($substring)
         /**
          * Pour autocompletion var categorielle ajout arbre
-         * retourne les stadedev qui contiennent la substring
+         * retourne les etat qui contiennent la substring
          */
     {
         $db = DB::connexion();
 
         $request = "
-            SELECT stadedev FROM stadedev
-        WHERE LOWER(stadedev) LIKE LOWER(concat('%', :substring, '%'))
+            SELECT arb_etat FROM etat
+        WHERE LOWER(arb_etat) LIKE LOWER(concat('%', :substring, '%'))
             ";
 
         $statement = $db->prepare($request);
