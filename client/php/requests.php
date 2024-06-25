@@ -2,6 +2,7 @@
 require_once('../../DB.php');
 
 require_once ('User.php');
+require_once ('Tree.php')
 
 // Connection to the database
 $db = DB::connexion();
@@ -40,6 +41,8 @@ function get($db, $requestRessource)
         $user_password = $_GET["user_password"];
         $data = User::authenticate($user_email, $user_password);
 
+    }else if($requestRessource == 'info_arbre'){
+        $data = Tree::get_info_arbre();
     }
 
     // Envoi de la réponse au client.
