@@ -286,6 +286,9 @@ footer .subtitle{
     width: 100%;
     border-radius: 1em;
     text-align: center;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
 }
 .main_content table th a{
     text-decoration: none;
