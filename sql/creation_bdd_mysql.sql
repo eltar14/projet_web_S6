@@ -16,6 +16,16 @@ DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS role_user;
 DROP TABLE IF EXISTS feuillage;
 
+#------------------------------------------------------------
+# Table: quartier
+#------------------------------------------------------------
+
+CREATE TABLE quartier(
+                         id_quartier  Int  Auto_increment  NOT NULL ,
+                         clc_quartier Varchar (240) NOT NULL
+    ,CONSTRAINT quartier_PK PRIMARY KEY (id_quartier)
+)ENGINE=InnoDB;
+
 
 #------------------------------------------------------------
 # Table: secteur
@@ -23,22 +33,11 @@ DROP TABLE IF EXISTS feuillage;
 
 CREATE TABLE secteur(
                         id_secteur  Int  Auto_increment  NOT NULL ,
-                        clc_secteur Varchar (240) NOT NULL
+                        clc_secteur Varchar (240) NOT NULL ,
+                        id_quartier Int NOT NULL
     ,CONSTRAINT secteur_PK PRIMARY KEY (id_secteur)
-)ENGINE=InnoDB;
 
-
-#------------------------------------------------------------
-# Table: quartier
-#------------------------------------------------------------
-
-CREATE TABLE quartier(
-                         id_quartier  Int  Auto_increment  NOT NULL ,
-                         clc_quartier Varchar (240) NOT NULL ,
-                         id_secteur   Int NOT NULL
-    ,CONSTRAINT quartier_PK PRIMARY KEY (id_quartier)
-
-    ,CONSTRAINT quartier_secteur_FK FOREIGN KEY (id_secteur) REFERENCES secteur(id_secteur)
+    ,CONSTRAINT secteur_quartier_FK FOREIGN KEY (id_quartier) REFERENCES quartier(id_quartier)
 )ENGINE=InnoDB;
 
 
