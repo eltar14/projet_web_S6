@@ -1,5 +1,6 @@
 // Connexion de l'utilisateur
 function connect_user(id_user){
+function connect_user(id_user) {
     //$('#id_user').text(id_user);
     if (id_user !== null){
         $('#incorrect_login').hide();

@@ -2,6 +2,7 @@
 require_once('../../DB.php');
 
 require_once ('User.php');
+require_once ('Tree.php');
 require_once ('Stadedev.php');
 
 
@@ -42,6 +43,8 @@ function get($db, $requestRessource)
         $user_password = $_GET["user_password"];
         $data = User::authenticate($user_email, $user_password);
 
+    }else if($requestRessource == 'info_arbre'){
+        $data = Tree::get_info_arbre();
     }elseif($requestRessource == 'get_lines_substr_in_stadedev') {
         $substring = $_GET["substring"];
         error_log($substring);
