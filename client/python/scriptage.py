@@ -1,26 +1,37 @@
 import pandas as pd
 import json
 import pickle
+import numpy as np
 import sys
+from sklearn.metrics import r2_score
 
 def age_estim(data_json, dico):
     try:
         data = json.loads(data_json)
         print("Data JSON:", data)  # Message de débogage
+
         df = pd.DataFrame(data)
         X = df[['haut_tronc', 'tronc_diam', 'fk_stadedev', 'clc_nbr_diag', 'fk_nomtech', 'haut_tot']]
-        X['fk_stadedev'] = dico["encoder"].transform(X[['fk_stadedev']])
-        X['fk_nomtech'] = dico["encoderlabel"].transform(X[['fk_nomtech']])
+        Y = df[['age_estim']]
+
+        X['fk_stadedev'] = pd.DataFrame(dico["encoder"].transform(X[['fk_stadedev']]))
+        X['fk_nomtech'] = pd.DataFrame(dico["encoderlabel"].transform(X[['fk_nomtech']]))
         X = dico["scaler_feature"].transform(X)
 
         pred = dico["RandomForest"].predict(X)
         pred = pred.reshape(-1, 1)
         pred = dico["scaler_age"].inverse_transform(pred)
 
+        print("r2_score", r2_score(Y, pred))
+
         age_estimated = pd.DataFrame(pred, columns=['age_estim'])
         age_estimated_json = age_estimated.to_json(orient='records')
 
-        return age_estimated_json
+        # Écriture du résultat dans un fichier JSON
+        with open("agepredit.json", "w") as outfile:
+            outfile.write(age_estimated_json)
+
+        return "agepredit.json"  # Renvoie le nom du fichier JSON
     except Exception as e:
         print("Error in age_estim:", str(e))
         raise
