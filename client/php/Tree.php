@@ -17,7 +17,6 @@ class Tree
     a.tronc_diam,
     a.revetement,
     a.age_estim,
-    a.prec_estim,
     a.clc_nbr_diag,
     a.remarquable,
     e.arb_etat,
@@ -29,7 +28,6 @@ class Tree
     v.villeca,
     u.nom_user,
     u.prenom_user,
-    u.email_user,
     se.clc_secteur,
     f.feuillage
     FROM 
@@ -53,7 +51,7 @@ class Tree
     JOIN 
         secteur se ON a.id_secteur = se.id_secteur
     JOIN 
-        feuillage f ON a.id_feuillage = f.id_feuillage;
+        feuillage f ON a.id_feuillage = f.id_feuillage ORDER BY id_arbre LIMIT 100;
     ");
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);

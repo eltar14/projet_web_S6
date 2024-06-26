@@ -3,8 +3,8 @@
 #------------------------------------------------------------
 
 DROP TABLE IF EXISTS arbre;
-DROP TABLE IF EXISTS quartier;
 DROP TABLE IF EXISTS secteur;
+DROP TABLE IF EXISTS quartier;
 DROP TABLE IF EXISTS etat;
 DROP TABLE IF EXISTS stadedev;
 DROP TABLE IF EXISTS port;
