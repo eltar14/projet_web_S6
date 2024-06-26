@@ -53,6 +53,7 @@ function get($db, $requestRessource)
 
     }else if($requestRessource == 'info_arbre'){
         $data = Tree::get_info_arbre();
+        //var_dump($data);
     }elseif($requestRessource == 'get_lines_substr_in_stadedev') {
         $substring = $_GET["substring"];
         //error_log($substring);

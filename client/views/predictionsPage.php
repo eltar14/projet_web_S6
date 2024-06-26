@@ -2,7 +2,7 @@
 <html lang="fr" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>Un tableau vreummant</title>
+    <title>Une predictions vreummant</title>
     <link rel="icon" type="image/x-icon" href="/client/views/img/logo.png">
     <!--    Our styles-->
     <link rel="stylesheet" href="../css/style.css">
@@ -15,11 +15,7 @@
 <body>
 
 <section class='main_content'>
-<table id="arbre_info">
 
-</table>
-    <div id="pagination">
-    </div>
 
 </section>
 
