@@ -11,6 +11,7 @@
 // \param data The data associated with the request.
 function ajaxRequest(type, url, callback, data = null)
 {
+  console.warn(type)
   let xhr;
 
   // Create XML HTTP request.

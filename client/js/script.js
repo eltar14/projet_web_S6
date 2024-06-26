@@ -133,7 +133,7 @@ window.onload = function () {
 // AJAX request
 $('#testAjaxBtn').click(() =>
     {
-        ajaxRequest('GET', '../php/requests.php/get_lines_substr_in_stadedev/', to_log, `substring=${$('#testAjaxTxtInput').val()}`);
+        ajaxRequest('GET', '../php/requests.php/get_id_x_add_etat/', to_log, `name=ABATTUXXE`);
     }
 );
 
@@ -141,7 +141,7 @@ $('#testAjaxBtn').click(() =>
 /* https://www.w3schools.com/howto/howto_js_autocomplete.asp*/
 /*execute a function when someone clicks in the document:*/
 function autocomplete(inp, arr) {
-    console.warn(arr)
+    //console.warn(arr)
     /*the autocomplete function takes two arguments,
     the text field element and an array of possible autocompleted values:*/
     var currentFocus;
@@ -288,3 +288,87 @@ $('#feuillage').on('input',
         ajaxRequest('GET', '../php/requests.php/get_lines_substr_in_feuillage/', autocomplete_aux_feuillage, `substring=${$('#feuillage').val()}`);
     })
 ;
+
+
+
+
+// ======================
+
+
+
+
+
+
+
+$('#add_tree_button').on('click', function (e){
+    console.error("CLICK!")
+    /**
+     * ============ AJOUT ARBRE via formumaire, onclick btn ===================
+     *
+     * //https://stackoverflow.com/questions/42779823/how-to-submit-a-form-only-if-all-the-required-attr-fields-are-filled-using-boots#:~:text=%24(%27form%27,).submit()%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D)
+     */
+    e.preventDefault();
+    var check = true;
+    $('.required').each(function(){
+        console.log("ch"); // ehhh marche pas
+        // run other filter functions here
+        if($(this).val().trim().length < 1){
+            check = false;
+        }
+    });
+    if(!check){
+        //alert('something is missing');
+        console.warn('something is missing')
+    } else {
+        console.warn("all fine")
+        // all is fine
+        //$(this).submit();
+
+        let longitude =$('#longitude').val();
+        let latitude = $('#latitude').val();
+        let haut_tot = $('#haut_tot').val();
+        let haut_tronc = $('#haut_tronc').val();
+        let diam_tronc = $('#tronc_diam').val();
+        let revetement = document.getElementById('revetement').checked; // marche pas en jquery ??!?
+        let nbr_diag = $('#clc_nbr_diag').val();
+        let remarquable = document.getElementById('remarquable').checked;
+        let etat = $('#etat').val();
+        let stadedev = $('#stadedev').val();
+        let port = $('#port').val();
+        let pied = $('#pied').val();
+        let situation = $('#situation').val();
+        let nomtech = $('#nomtech').val();
+        let ville = $('#villeca').val();
+        let secteur = $('#secteur').val();
+        let feuillage = $('#feuillage').val();
+        let id_user = localStorage.getItem('id_user');
+
+
+        console.log(longitude, latitude, haut_tot, haut_tronc, diam_tronc, revetement, nbr_diag, remarquable,
+            etat, stadedev, port, pied, situation, nomtech, ville, secteur, feuillage, id_user);
+
+
+
+        ajaxRequest('POST', '../php/requests.php/add_tree/', ()=>{},   'latitude='+ latitude +
+                                                                                            '&longitude=' +  longitude +
+                                                                                            '&haut_tot=' + haut_tot +
+                                                                                            '&haut_tronc=' + haut_tronc +
+                                                                                            '&diam_tronc=' + diam_tronc +
+                                                                                            '&revetement=' + revetement +
+                                                                                            '&nbr_diag=' + nbr_diag +
+                                                                                            '&remarquable=' + remarquable +
+                                                                                            '&etat=' + etat +
+                                                                                            '&stadedev=' + stadedev +
+                                                                                            '&port=' + port +
+                                                                                            '&pied=' + pied +
+                                                                                            '&situation=' + situation +
+                                                                                            '&nomtech=' + nomtech +
+                                                                                            '&ville=' + ville +
+                                                                                            '&secteur=' + secteur +
+                                                                                            '&feuillage=' + feuillage +
+                                                                                            '&id_user=' + id_user
+        );
+
+    }
+
+});

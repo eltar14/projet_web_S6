@@ -28,7 +28,7 @@ class Nomtech
     {
         $db = DB::connexion();
         $request = "
-            SELECT nomtech FROM nomtech
+            SELECT id_nomtech FROM nomtech
         WHERE LOWER(nomtech) LIKE LOWER(:name)
             ";
 

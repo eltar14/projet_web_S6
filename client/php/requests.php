@@ -81,6 +81,9 @@ function get($db, $requestRessource)
     }elseif($requestRessource == 'get_lines_substr_in_feuillage'){
         $substring = $_GET["substring"];
         $data = Feuillage::get_lines_substr_in_feuillage($substring);
+    }elseif($requestRessource == 'get_id_x_add_etat'){
+        $name = $_GET["name"]; // temp pour tests
+        $data = Etat::get_id_x_add_etat($name);
     }
 
 
@@ -96,6 +99,24 @@ function get($db, $requestRessource)
 
 
 // ========= POST ==========
+function post($db, $requestRessource){
+    if($requestRessource == 'add_tree'){
+        // ajout d'un arbre dans la base de donnees
+        if (isset($_POST["latitude"], $_POST["longitude"], $_POST["haut_tot"], $_POST["haut_tronc"], $_POST["diam_tronc"], $_POST["revetement"], $_POST["nbr_diag"], $_POST["remarquable"], $_POST["etat"], $_POST["stadedev"], $_POST["port"], $_POST["pied"], $_POST["situation"], $_POST["nomtech"], $_POST["ville"], $_POST["secteur"], $_POST["feuillage"], $_POST["id_user"])){
+            Tree::add($_POST["longitude"], $_POST["latitude"], $_POST["haut_tot"], $_POST["haut_tronc"], $_POST["diam_tronc"], $_POST["revetement"], $_POST["nbr_diag"], $_POST["remarquable"], $_POST["etat"], $_POST["stadedev"], $_POST["port"], $_POST["pied"], $_POST["situation"], $_POST["nomtech"], $_POST["ville"], $_POST["secteur"], $_POST["feuillage"], $_POST["id_user"]);
+            header('HTTP/1.1 201 Created');
+            exit();
+        }else {
+            header('HTTP/1.1 xxx error');
+            exit();
+        }
+    }
+
+    else{
+        header('HTTP/1.1 xxx error');
+        exit();
+    }
+}
 
 // ========= PUT ==========
 

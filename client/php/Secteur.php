@@ -28,7 +28,7 @@ class Secteur
     {
         $db = DB::connexion();
         $request = "
-            SELECT clc_secteur FROM secteur
+            SELECT id_secteur FROM secteur
         WHERE LOWER(clc_secteur) LIKE LOWER(:name)
             ";
 

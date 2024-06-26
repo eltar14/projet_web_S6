@@ -30,7 +30,7 @@ class Port
     {
         $db = DB::connexion();
         $request = "
-            SELECT port FROM port
+            SELECT id_port FROM port
         WHERE LOWER(port) LIKE LOWER(:name)
             ";
 

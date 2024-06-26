@@ -29,7 +29,7 @@ class Situation
     {
         $db = DB::connexion();
         $request = "
-            SELECT situaton FROM situation
+            SELECT id_situation FROM situation
         WHERE LOWER(situaton) LIKE LOWER(:name)
             ";
 

@@ -29,7 +29,7 @@ class Feuillage
     {
         $db = DB::connexion();
         $request = "
-            SELECT feuillage FROM feuillage
+            SELECT id_feuillage FROM feuillage
         WHERE LOWER(feuillage) LIKE LOWER(:name)
             ";
 
@@ -63,9 +63,9 @@ class Feuillage
 
     static function get_id_x_add_feuillage($name)
     {
-        $id = Nomtech::get_id_by_name($name);
+        $id = Feuillage::get_id_by_name($name);
         if($id == NULL){
-            $id = Nomtech::add($name);
+            $id = Feuillage::add($name);
         }
         return $id;
     }

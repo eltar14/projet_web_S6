@@ -28,7 +28,7 @@ class Pied
     {
         $db = DB::connexion();
         $request = "
-            SELECT pied FROM pied
+            SELECT id_pied FROM pied
         WHERE LOWER(pied) LIKE LOWER(:name)
             ";
 
