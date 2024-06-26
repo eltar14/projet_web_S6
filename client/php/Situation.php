@@ -24,4 +24,52 @@ class Situation
     }
 
 
+
+    static function get_id_by_name($name)
+    {
+        $db = DB::connexion();
+        $request = "
+            SELECT situaton FROM situation
+        WHERE LOWER(situaton) LIKE LOWER(:name)
+            ";
+
+        $statement = $db->prepare($request);
+        $statement->bindParam(':name', $name);
+
+        $statement->execute();
+        return $statement->fetch()[0];
+    }
+
+
+    static function add_situation($name){
+        try
+        {
+            $db = DB::connexion();
+            $request = "
+        INSERT INTO situation(situaton) VALUES(:name); 
+        ";
+
+            $statement = $db->prepare($request);
+            $statement->bindParam(':name', $name);
+
+            $statement->execute();
+            return $db->lastInsertId();
+
+        }
+        catch (PDOException $exception)
+        {
+            error_log('Request error: ' . $exception->getMessage());
+            return "error";
+        }
+    }
+
+    static function get_id_x_add_situation($name)
+    {
+        $id = Situation::get_id_by_name($name);
+        if($id == NULL){
+            $id = Situation::add_situation($name);
+        }
+        return $id;
+    }
+
 }
