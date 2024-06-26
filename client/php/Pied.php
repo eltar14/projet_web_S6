@@ -24,4 +24,51 @@ class Pied
     }
 
 
+    static function get_id_by_name($name)
+    {
+        $db = DB::connexion();
+        $request = "
+            SELECT pied FROM pied
+        WHERE LOWER(pied) LIKE LOWER(:name)
+            ";
+
+        $statement = $db->prepare($request);
+        $statement->bindParam(':name', $name);
+
+        $statement->execute();
+        return $statement->fetch()[0];
+    }
+
+
+    static function add_pied($name){
+        try
+        {
+            $db = DB::connexion();
+            $request = "
+            INSERT INTO pied(pied) VALUES(:name); 
+            ";
+
+            $statement = $db->prepare($request);
+            $statement->bindParam(':name', $name);
+
+            $statement->execute();
+            return $db->lastInsertId();
+
+        }
+        catch (PDOException $exception)
+        {
+            error_log('Request error: ' . $exception->getMessage());
+            return "error";
+        }
+    }
+
+    static function get_id_x_add_pied($name)
+    {
+        $id = Pied::get_id_by_name($name);
+        if($id == NULL){
+            $id = Pied::add_pied($name);
+        }
+        return $id;
+    }
+
 }
