@@ -6,15 +6,15 @@ class Clustering
     {
         $pythonScript = '../python/criptcluster.py'; // Chemin vers le script
 
-        // Écrire les données JSON dans un fichier temporaire
+        // on créé un fichier temporaire car le json pourrait être trop grand pour être directementt passé en argument
         $tempFile = tempnam(sys_get_temp_dir(), 'data_');
         file_put_contents($tempFile, json_encode($data));
 
-        // Construire la commande avec le chemin du fichier temporaire
+        // création et exécution de la commande avec le json et le nombre de clusters
         $command = escapeshellcmd("python \"$pythonScript\" \"$tempFile\" \"$nbcluster\"");
         $output = shell_exec($command);
 
-        // Supprimer le fichier temporaire après utilisation
+        // supression du fichier temporaire
         unlink($tempFile);
 
         return $output; // renvoie le résultat du script Python
