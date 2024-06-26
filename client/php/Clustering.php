@@ -4,11 +4,20 @@ class Clustering
 {
     function cluster($data, $nbcluster)
     {
-        $pythonScript = 'scriptcluster.py';
-        $command = escapeshellcmd("python $pythonScript '$data' $nbcluster");
+        $pythonScript = '../python/criptcluster.py'; // Chemin vers le script
+
+        // Écrire les données JSON dans un fichier temporaire
+        $tempFile = tempnam(sys_get_temp_dir(), 'data_');
+        file_put_contents($tempFile, json_encode($data));
+
+        // Construire la commande avec le chemin du fichier temporaire
+        $command = escapeshellcmd("python \"$pythonScript\" \"$tempFile\" \"$nbcluster\"");
         $output = shell_exec($command);
-        return $output;
-        // renvoie le html de la map des clusters avec les anomalies
+
+        // Supprimer le fichier temporaire après utilisation
+        unlink($tempFile);
+
+        return $output; // renvoie le résultat du script Python
     }
 }
 ?>

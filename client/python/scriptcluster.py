@@ -1,15 +1,17 @@
-
 import numpy as np
 import pandas as pd
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score, davies_bouldin_score, calinski_harabasz_score
-from sklearn.ensemble import IsolationForest
 import plotly.express as px
 import plotly.graph_objects as go
 import sys
 import json
 
-def clustering(data_json, nbcluster):
+def clustering(data_file_path, nbcluster):
+    with open(data_file_path, 'r') as f:
+        data_json = f.read()
+    if not data_json.strip():
+        raise ValueError("Le fichier JSON est vide ou n'a pas pu être lu correctement.")
     data_arbre = pd.DataFrame(json.loads(data_json))
 
     pertinent_col = ['longitude', 'latitude', 'haut_tot', 'tronc_diam', 'age_estim', 'haut_tronc']
@@ -19,17 +21,6 @@ def clustering(data_json, nbcluster):
 
     kmeans = KMeans(n_clusters=nbcluster, random_state=0, init='k-means++', n_init=10, max_iter=300).fit(X)
     data_arbre_reduit['cluster'] = kmeans.labels_
-
-    score_silhouette = silhouette_score(X, kmeans.labels_)
-    score_davies_bouldin = davies_bouldin_score(X, kmeans.labels_)
-    score_calinski_harabasz = calinski_harabasz_score(X, kmeans.labels_)
-
-    X_anomalies = data_arbre_reduit[['age_estim', 'haut_tronc', 'tronc_diam']].values
-    iso_forest = IsolationForest(contamination=0.05, random_state=42)
-    data_arbre_reduit['anomaly'] = iso_forest.fit_predict(X_anomalies)
-
-    anomalies = data_arbre_reduit[data_arbre_reduit['anomaly'] == -1]
-    nb_anomalies = np.count_nonzero(data_arbre_reduit['anomaly'] == -1)
 
     cluster_mean_height = data_arbre_reduit.groupby('cluster')['haut_tot'].mean()
 
@@ -62,34 +53,8 @@ def clustering(data_json, nbcluster):
                             hover_data=["haut_tot", "tronc_diam", "age_estim", "haut_tronc"],
                             size_max=15, zoom=12, mapbox_style="carto-positron")
 
-    anomalies = data_arbre_reduit[data_arbre_reduit['anomaly'] == -1]
-    fig.add_trace(go.Scattermapbox(
-        lat=anomalies['latitude'],
-        lon=anomalies['longitude'],
-        mode='markers',
-        marker=go.scattermapbox.Marker(
-            size=9,
-            color='black'
-        ),
-        text=["Anomalie"] * len(anomalies),
-        textposition="top right",
-        hoverinfo='text',
-        name="Anomalies"
-    ))
-
-    for index, row in anomalies.iterrows():
-        fig.add_trace(go.Scattermapbox(
-            lat=[row['latitude']],
-            lon=[row['longitude']],
-            mode='text',
-            text=["Anomalie"],
-            textposition="top right",
-            showlegend=False,
-            textfont=dict(color="red", size=12)
-        ))
-
     fig.update_layout(
-        title="Visualisation des Clusters et des Anomalies",
+        title="Visualisation des Clusters",
         legend=dict(
             yanchor="top",
             y=0.99,
@@ -102,14 +67,13 @@ def clustering(data_json, nbcluster):
         )
     )
 
-    # Enregistrer la figure en tant que fichier HTML
+    # Enregistrer la figure en tant que fichier HTML fixe
     output_html = "cluster_map.html"
     fig.write_html(output_html)
 
     return output_html
 
-
-data_json = sys.argv[1]
+data_file_path = sys.argv[1]
 nbcluster = int(sys.argv[2])
-clustering(data_json, nbcluster)
-
+output_html = clustering(data_file_path, nbcluster)
+print(output_html)
