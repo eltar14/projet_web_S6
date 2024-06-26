@@ -24,4 +24,51 @@ class Nomtech
     }
 
 
+    static function get_id_by_name($name)
+    {
+        $db = DB::connexion();
+        $request = "
+            SELECT nomtech FROM nomtech
+        WHERE LOWER(nomtech) LIKE LOWER(:name)
+            ";
+
+        $statement = $db->prepare($request);
+        $statement->bindParam(':name', $name);
+
+        $statement->execute();
+        return $statement->fetch()[0];
+    }
+
+    static function add($name){
+        try
+        {
+            $db = DB::connexion();
+            $request = "
+        INSERT INTO nomtech(nomtech) VALUES(:name); 
+        ";
+
+            $statement = $db->prepare($request);
+            $statement->bindParam(':name', $name);
+
+            $statement->execute();
+            return $db->lastInsertId();
+
+        }
+        catch (PDOException $exception)
+        {
+            error_log('Request error: ' . $exception->getMessage());
+            return "error";
+        }
+    }
+
+    static function get_id_x_add_nomtech($name)
+    {
+        $id = Nomtech::get_id_by_name($name);
+        if($id == NULL){
+            $id = Nomtech::add($name);
+        }
+        return $id;
+    }
+
+
 }
