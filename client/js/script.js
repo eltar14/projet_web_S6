@@ -4,28 +4,28 @@ function connect_user(id_user) {
         $('#incorrect_login').hide();
         closeForm()
         localStorage.setItem('id_user', id_user);
-        update_connect_button()
+        update_connect_state()
     } else {
         $('#incorrect_login').show();
     }
 
 }
 // script connexion
-window.onload = function update_connect_button() {
-    if (localStorage.getItem('id_user') !== null) {
-        $('#open-button').text('Disconnect');
 
-    } else {
-        $('#open-button').text('Connexion');
-    }
-}
 //TODO refactor
-function update_connect_button() {
-    if (localStorage.getItem('id_user') !== null) {
+function update_connect_state() {
+    if (localStorage.getItem('id_user') !== null) { // si la personne est connectee
         $('#open-button').text('Disconnect');
+        $('#add_tree_form').removeClass("need_login")
+        $('#add_tree_form_auth_advice').hide()
+
+
 
     } else {
         $('#open-button').text('Connexion');
+        $('#add_tree_form').addClass("need_login")
+        $('#add_tree_form_auth_advice').show()
+
     }
 }
 
@@ -39,7 +39,7 @@ function openForm() {
 
     } else {
         localStorage.removeItem('id_user');
-        update_connect_button();
+        update_connect_state();
     }
 
 
@@ -346,8 +346,12 @@ $('#add_tree_button').on('click', function (e){
     if(!check){
         //alert('something is missing');
         console.warn('something is missing')
+        $('#add_tree_form_div_missing_values').show()
+        $('#add_tree_form_div_success').hide()
     } else {
         console.warn("all fine")
+        $('#add_tree_form_div_missing_values').hide()
+
         // all is fine
         //$(this).submit();
 
@@ -395,7 +399,26 @@ $('#add_tree_button').on('click', function (e){
                                                                                             '&feuillage=' + feuillage +
                                                                                             '&id_user=' + id_user
         );
+        $('#add_tree_form_div_success').show()
 
     }
 
 });
+
+
+// gestion bouton connexion
+window.onload = function update_connect_state() {
+    if (localStorage.getItem('id_user') !== null) { // si la personne est connectee
+        $('#open-button').text('Disconnect');
+        $('#add_tree_form').removeClass("need_login")
+        $('#add_tree_form_auth_advice').hide()
+
+
+
+    } else {
+        $('#open-button').text('Connexion');
+        $('#add_tree_form').addClass("need_login")
+        $('#add_tree_form_auth_advice').show()
+
+    }
+}

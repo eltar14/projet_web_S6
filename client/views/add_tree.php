@@ -15,8 +15,11 @@
 <body>
 <section class="main_content">
     <h1>Ajout d'un arbre dans la base de données</h1>
+    <div class="advice" id="add_tree_form_auth_advice">
+        Veuillez vous connecter pour ajouter un arbre.
+    </div>
     <div>
-        <form autocomplete="off">
+        <form autocomplete="off" id="add_tree_form" class="need_login">
 
             <div style="display: flex">
                 <label for="longitude">Longitude :</label>
@@ -145,6 +148,8 @@
             </div>
 
             <div style="margin-bottom:1em">
+                <div id="add_tree_form_div_missing_values" class="error" style="display: none">Formulaire incomplet !</div>
+                <div id="add_tree_form_div_success" class="success" style="display: none">Arbre ajouté avec succès.</div>
                 <button type="submit" id="add_tree_button">Ajouter l'Arbre</button>
             </div>
         </form>
@@ -152,13 +157,14 @@
 </section>
 
 
-<section class="main_content">
+<!-- <section class="main_content">
     <button id="testAjaxBtn">TEST vers console js</button>
-</section>
+</section> -->
 
 </body>
 <?=$footer?>
 
 <script rel="script" src="../js/ajax.js"></script>
 <script rel="script" src="../js/script.js"></script>
+
 </html>
