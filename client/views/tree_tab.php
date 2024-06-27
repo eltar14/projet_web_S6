@@ -53,6 +53,10 @@
 
 </section>
 
+<section class="main_content">
+    <table id="result_age_tab"></table>
+</section>
+
 
 </body>
 <?=$footer?>
