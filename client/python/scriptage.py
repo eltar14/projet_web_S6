@@ -21,9 +21,12 @@ def age_estim(data_json, dico):
         pred = pred.reshape(-1, 1)
         pred = dico["scaler_age"].inverse_transform(pred)
 
+        df['age_estim'] = pred
+        #renvoie tout le dataframe formaté en json
+        age_estimated_json = df.to_json(orient='records')
 
-        age_estimated = pd.DataFrame(pred, columns=['age_estim'])
-        age_estimated_json = age_estimated.to_json(orient='records')
+
+
 
 
         # Écriture du résultat dans un fichier JSON

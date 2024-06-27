@@ -284,23 +284,34 @@ function info_arbre(tab_arbre) {
 }
 
 function display_tab_age(tab){
-    tab = JSON.parse(tab)
-    document.getElementById('result_age_tab').innerHTML = ''
+    tab = JSON.parse(tab);
     console.log(tab)
-    let table = document.getElementById('result_age_tab')
-    let tr = document.createElement('tr')
-    let th = document.createElement('th')
-    th.textContent = 'Age prédit'
-    tr.appendChild(th)
-    table.appendChild(tr)
-    console.warn(typeof(tab))
-    for(i in tab){
-        let tr = document.createElement('tr')
-        let td = document.createElement('td')
-        td.textContent = Math.round(tab[i]['age_estim'])
-        tr.appendChild(td)
-        table.appendChild(tr)
+    const tableBody = document.querySelector('#result_age_tab');
+    tableBody.innerHTML = '';
+    const tr = document.createElement('tr');
+    for (const key in tab[0]) {
+        const th = document.createElement('th');
+        th.textContent = key;
+        tr.appendChild(th);
+
     }
+    tableBody.appendChild(tr);
+    tab.forEach(arbre => {
+        const tr = document.createElement('tr');
+        for (const key in arbre) {
+            const td = document.createElement('td');
+            // round age_estim
+            if (key === 'age_estim') {
+                td.textContent = Math.round(arbre[key]);
+                tr.appendChild(td);
+                continue;
+            }
+            td.textContent = arbre[key];
+            tr.appendChild(td);
+        }
+        tableBody.appendChild(tr);
+
+    });
 }
 
 
