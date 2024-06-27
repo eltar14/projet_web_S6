@@ -89,9 +89,9 @@ function get($db, $requestRessource)
         $name = $_GET["name"]; // temp pour tests
         $data = Etat::get_id_x_add_etat($name);
     }elseif($requestRessource == 'prediction'){
+
         $d = urldecode($_GET['selectedRows']);
-        $prediction = new Prediction();
-        $result = $prediction->predict($d);
+        $result = predict($d);
         if (empty($result)) {
             $data = "error : No result received from the Python script";
         } else {

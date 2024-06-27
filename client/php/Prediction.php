@@ -9,9 +9,10 @@
         file_put_contents($tempFile, $data);
         // Création et exécution de la commande avec le JSON
         $command = "python \"$pythonScript\" \"$tempFile\"";
-        echo $command;
         $output = shell_exec($command);
         echo $output;
+        // Suppression du fichier temporaire
+        unlink($tempFile);
         // Retourne le nom du fichier JSON généré par le script Python
         return trim($output);
     }

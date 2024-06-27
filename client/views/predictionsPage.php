@@ -17,7 +17,7 @@
 <section class='main_content'>
 
     <h2>Predictions</h2>
-    <?=$result_tab?>
+    <div id="result"></div>
 
 </section>
 
@@ -26,5 +26,6 @@
 <?=$footer?>
 
 <script rel="script" src="../js/ajax.js"></script>
+
 
 </html>

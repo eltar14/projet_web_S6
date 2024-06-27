@@ -58,13 +58,27 @@ $('#login_submit_button').click(() => {
  * @param tab_arbre
  */
 function info_arbre(tab_arbre) {
+    // Change keys in the data
+    const updatedTabArbre = tab_arbre.map(arbre => {
+        return {
+            ...arbre,
+            'fk_stadedev': arbre['stadedev'],
+            'fk_nomtech': arbre['nomtech']
+        };
+    });
+    //remove the keys that are not needed
+    updatedTabArbre.forEach(arbre => {
+        delete arbre['stadedev'];
+        delete arbre['nomtech'];
+    });
+
     const table = document.querySelector('#arbre_table'); // table element
     const tableBody = document.querySelector('#arbre_info');
     const itemsPerPage = 10; // number of items per page
     let currentPage = 1; // current page
     let selectedRows = []; // selected rows
-    let sortedTabArbre = [...tab_arbre]; // copy of the tabArbre with spread operator
-    const originalTabArbre = [...tab_arbre]; // Save the original data will be used to reset the sort
+    let sortedTabArbre = [...updatedTabArbre]; // copy of the tabArbre with spread operator
+    const originalTabArbre = [...updatedTabArbre]; // Save the original data will be used to reset the sort
 
     // https://geeklecode.com/loperateur-spread-en-javascript-va-vous-simplifier-la-vie/
 
@@ -164,9 +178,8 @@ function info_arbre(tab_arbre) {
         predictionBtn.className = 'btn';
         // handle the click on the prediction button
         predictionBtn.onclick = () => {
-            const selectedRowsData = encodeURIComponent(JSON.stringify(selectedRows));
-            const predictionPageUrl = `predictionsPage.php?selectedRows=${selectedRowsData}`;
-            window.open(predictionPageUrl, '_blank');
+            console.log(selectedRows);
+            ajaxRequest('GET', '../php/requests.php/prediction/', display_tab_age,JSON.stringify(selectedRows));
         };
         document.querySelector('#pagination').appendChild(predictionBtn);
     }
@@ -223,8 +236,8 @@ function info_arbre(tab_arbre) {
             "clc_nbr_diag": "clc_nbr_diag",
             "remarquable": "remarquable",
             "arb_etat": "arb_etat",
-            "stadedev": "stadedev",
-            "nomtech": "nomtech",
+            "fk_stadedev": "fk_stadedev",  // updated key
+            "fk_nomtech": "fk_nomtech",    // updated key
             "clc_secteur": "clc_secteur",
             "feuillage": "feuillage"
         };
@@ -269,6 +282,24 @@ function info_arbre(tab_arbre) {
     displayPage(currentPage);
     createPaginationControls();
 }
+
+function display_tab_age(tab){
+    console.log(tab)
+    let table = document.getElementById('result_age_tab')
+    let tr = document.createElement('tr')
+    let th = document.createElement('th')
+    th.textContent = 'Age prédit'
+    tr.appendChild(th)
+    table.appendChild(tr)
+    tab.forEach(element => {
+        let tr = document.createElement('tr')
+        let td = document.createElement('td')
+        td.textContent = element['age_estim']
+        tr.appendChild(td)
+        table.appendChild(tr)
+    });
+}
+
 
 function to_log(str) {
     console.log(str)
