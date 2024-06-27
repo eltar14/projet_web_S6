@@ -179,7 +179,7 @@ function info_arbre(tab_arbre) {
         // handle the click on the prediction button
         predictionBtn.onclick = () => {
             console.log(selectedRows);
-            ajaxRequest('GET', '../php/requests.php/prediction/', display_tab_age,JSON.stringify(selectedRows));
+            ajaxRequest('GET', '../php/requests.php/prediction/', display_tab_age,'selectedRows='+JSON.stringify(selectedRows));
         };
         document.querySelector('#pagination').appendChild(predictionBtn);
     }
@@ -284,6 +284,8 @@ function info_arbre(tab_arbre) {
 }
 
 function display_tab_age(tab){
+    tab = JSON.parse(tab)
+    document.getElementById('result_age_tab').innerHTML = ''
     console.log(tab)
     let table = document.getElementById('result_age_tab')
     let tr = document.createElement('tr')
@@ -291,13 +293,14 @@ function display_tab_age(tab){
     th.textContent = 'Age prédit'
     tr.appendChild(th)
     table.appendChild(tr)
-    tab.forEach(element => {
+    console.warn(typeof(tab))
+    for(i in tab){
         let tr = document.createElement('tr')
         let td = document.createElement('td')
-        td.textContent = element['age_estim']
+        td.textContent = Math.round(tab[i]['age_estim'])
         tr.appendChild(td)
         table.appendChild(tr)
-    });
+    }
 }
 
 

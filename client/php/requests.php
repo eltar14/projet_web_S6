@@ -95,8 +95,7 @@ function get($db, $requestRessource)
         if (empty($result)) {
             $data = "error : No result received from the Python script";
         } else {
-            $filePath = realpath('../python/' . $result);
-            $data = ["filepath" => $filePath];
+            $data = $result;
         }
     }elseif($requestRessource == 'clustering'){
         $nbcluster = intval($_GET['nbcluster']);

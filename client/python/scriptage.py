@@ -8,7 +8,6 @@ from sklearn.metrics import r2_score
 def age_estim(data_json, dico):
     try:
         data = json.loads(data_json)
-        print("Data JSON:", data)  # Message de débogage
 
         df = pd.DataFrame(data)
         X = df[['haut_tronc', 'tronc_diam', 'fk_stadedev', 'clc_nbr_diag', 'fk_nomtech', 'haut_tot']]
@@ -26,11 +25,11 @@ def age_estim(data_json, dico):
         age_estimated = pd.DataFrame(pred, columns=['age_estim'])
         age_estimated_json = age_estimated.to_json(orient='records')
 
-        # Écriture du résultat dans un fichier JSON
-        with open("agepredit.json", "w") as outfile:
-            outfile.write(age_estimated_json)
 
-        return "agepredit.json"  # Renvoie le nom du fichier JSON
+        # Écriture du résultat dans un fichier JSON
+
+
+        print(age_estimated_json)
     except Exception as e:
         print("Error in age_estim:", str(e))
         raise
@@ -39,10 +38,9 @@ def main():
     data_file_path = sys.argv[1]
     with open(data_file_path, 'r') as f:
         data_json = f.read()
-    with open("bocal.pkl", "rb") as f:
+    with open("../python/bocal.pkl", "rb") as f:
         dico = pickle.load(f)
-    result = age_estim(data_json, dico)
-    print(result)
+    age_estim(data_json, dico)
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
