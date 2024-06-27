@@ -1,4 +1,6 @@
 <?php
+$site_root = '/client';
+
 $footer2 = "
     <footer>
         No rights reserved, CIR26C
@@ -36,11 +38,11 @@ $footer = "
 
                     <ul>
                         <li>
-                            <a href='#'>Espace presse</a>
+                            <a href='$site_root/controllers/espace_presse.php'>Espace presse</a>
 
                         </li>
                         <li>
-                            <a href='#'>Nous contacter</a>
+                            <a href='$site_root/controllers/contacte.php'>Nous contacter</a>
 
                         </li>
                         <li>
@@ -67,10 +69,10 @@ $footer = "
                     <a href='#'>CGU</a>
                 </li>
                 <li>
-                    <a href='#'>Politique de protection des données</a>
+                    <a href='$site_root/controllers/protection.php'>Politique de protection des données</a>
                 </li>
                 <li>
-                    <a href='#'>Politique de gestion des cookies</a>
+                    <a href='$site_root/controllers/cookies.php'>Politique de gestion des cookies</a>
                 </li>
             </ul>
         </div>

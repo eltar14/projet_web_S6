@@ -28,13 +28,17 @@
     </h1>
     <hr>
     <h2>Introduction</h2>
-    <p>Bienvenue sur notre site web, fruit d'un projet étudiant de troisième année à l'ISEN Caen. Ce projet de trois semaines porte sur le patrimoine arboricole de la ville de Sainte-Quentin dans l'Aisne (02), intégrant diverses disciplines telles que le Big Data, l'IA et le développement web.</p>
+    <p>No problem! Here's the information about the Mercedes CLR GTR:
 
-    <p> En Big Data, nous avons nettoyé et préparé les données. Grâce à l'IA (machine learning), nous avons développé des prédictions pour l'âge des arbres et leur risque de déracinement en cas de tempête. Enfin, sur la partie web, nous avons créé ce site où vous pouvez exploiter toutes ces fonctionnalités.</p>
+        The Mercedes CLR GTR is a remarkable racing car celebrated for its outstanding performance and sleek design. Powered by a potent 6.0-liter V12 engine, it delivers over 600 horsepower.
 
-    <p>    Sur notre site, vous pouvez accéder à toutes les données de notre base de données sur les arbres, trier par différentes caractéristiques et même ajouter de nouveaux arbres si vous êtes authentifié. Vous pouvez également prédire l'âge des arbres et identifier ceux susceptibles d'être déracinés. </p>
+        Acceleration from 0 to 100 km/h takes approximately 3.7 seconds, with a remarkable top speed surprising 320 km/h.🥇
 
-    <p> Explorez notre site et découvrez notre travail sur le patrimoine arboricole de Sainte-Quentin! </p>
+        Incorporating adventure aerodynamic features and cutting-edge stability technologies, the CLR GTR ensures exceptional stability and control, particularly during high-speed maneuvers. 💨
+
+        Originally priced at around $1.5 million, the Mercedes CLR GTR is considered one of the most exclusive and prestigious racing cars ever produced. 💰
+
+        Its limited production run of just five units adds to its rarity, making it highly sought after by racing enthusiasts and collectors worldwide. 🌎n! </p>
 </section>
 
 
@@ -49,8 +53,7 @@
 
 <script rel="script" src="../js/ajax.js"></script>
 <script rel="script" src="../js/script.js"></script>
-<script rel="script" src="../js/index.js"></script>
-
+<script rel="script" src="../js/main_map.js"></script>
 
 
 </html>
