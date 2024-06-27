@@ -180,4 +180,41 @@ class Tree
 
         // get tous les ids des categorielles, si pas existants creer
     }
+
+    //une fonction qui fait une requete sql pour recupere toute les infos d'un arbre a partir d'un tableau d'id_arbre avec tout les join possible
+     static function get_all_arbre_by_id($id_arbre){
+
+         try {
+            if (empty($id_arbre)) {
+                return false;
+            }
+             $db = DB::connexion();
+             //requete sql je veux recuperer l'id arbre haut_tot tronc diam nomtech stadedev haut tronc clc nbr diag par id arbre
+                $request = 'SELECT arbre.id_arbre,arbre.age_estim,arbre.longitude,arbre.latitude,arbre.revetement,arbre.haut_tot, arbre.haut_tronc, arbre.tronc_diam, arbre.clc_nbr_diag,stadedev.stadedev, nomtech.nomtech, e.arb_etat, p.port, p2.pied, s.situaton, v.villeca, u.nom_user,u.prenom_user, se.clc_secteur, f.feuillage
+                            FROM arbre
+                            JOIN stadedev ON arbre.id_stadedev = stadedev.id_stadedev
+                            JOIN nomtech ON arbre.id_nomtech = nomtech.id_nomtech
+                            JOIN etat e on arbre.id_etat = e.id_etat
+                            JOIN port p on arbre.id_port = p.id_port
+                            JOIN pied p2 on arbre.id_pied = p2.id_pied
+                            JOIN situation s on arbre.id_situation = s.id_situation
+                            JOIN villeca v on arbre.id_villeca = v.id_villeca
+                            JOIN secteur se on arbre.id_secteur = se.id_secteur
+                            JOIN feuillage f on arbre.id_feuillage = f.id_feuillage
+                            LEFT JOIN user u on arbre.id_user = u.id_user 
+
+                            WHERE arbre.id_arbre IN ('.implode(',',$id_arbre).')';
+
+             $statement = $db->prepare($request);
+             $statement->execute();
+             return $statement->fetchAll(PDO::FETCH_ASSOC);
+
+         }catch (PDOException $exception){
+             error_log('Request error: '.$exception->getMessage());
+             return false;
+         }
+
+    }
+     
 }
+             

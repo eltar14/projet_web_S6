@@ -11,6 +11,7 @@
         //$command = 'python {} ' . $pythonScript . ' ' . $tempFile;
         $command = "python {$pythonScript} {$tempFile}";
         $result = shell_exec($command);
+        unlink($tempFile);
         return $result;
     }
 
