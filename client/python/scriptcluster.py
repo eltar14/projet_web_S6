@@ -14,9 +14,9 @@ def clustering(data_file_path, nbcluster):
         raise ValueError("Le fichier JSON est vide ou n'a pas pu être lu correctement.")
     data_arbre = pd.DataFrame(json.loads(data_json))
 
-    pertinent_col = ['longitude', 'latitude', 'haut_tot', 'tronc_diam', 'age_estim', 'haut_tronc']
-    data_arbre_reduit = data_arbre[pertinent_col].dropna()
 
+    pertinent_col = ['longitude', 'latitude', 'haut_tot', 'tronc_diam', 'age_estim', 'haut_tronc']
+    data_arbre_reduit = data_arbre[pertinent_col].copy(deep=True)
     X = data_arbre_reduit[['haut_tot']].values
 
     kmeans = KMeans(n_clusters=nbcluster, random_state=0, init='k-means++', n_init=10, max_iter=300).fit(X)
@@ -47,31 +47,15 @@ def clustering(data_file_path, nbcluster):
 
     data_arbre_reduit['cluster_name'] = data_arbre_reduit['cluster'].map(cluster_names)
 
-    fig = px.scatter_mapbox(data_arbre_reduit, lat="latitude", lon="longitude",
-                            color='cluster_name',
-                            size="tronc_diam",
-                            hover_data=["haut_tot", "tronc_diam", "age_estim", "haut_tronc"],
-                            size_max=15, zoom=12, mapbox_style="carto-positron")
+    data_arbre['cluster_name'] = data_arbre_reduit['cluster_name']
+    data_arbre['cluster'] = data_arbre_reduit['cluster']
 
-    fig.update_layout(
-        title="Visualisation des Clusters",
-        legend=dict(
-            yanchor="top",
-            y=0.99,
-            xanchor="left",
-            x=0.01,
-            bgcolor="rgba(255, 255, 255, 0.7)",
-            bordercolor="Black",
-            borderwidth=1,
-            font=dict(size=10)
-        )
-    )
+    res = data_arbre.filter(['id_arbre', 'cluster', 'cluster_name'])
+    res['id_arbre'] = res['id_arbre'].astype(str)
+    res['cluster'] = res['cluster'].astype(str)
 
-    # Enregistrer la figure en tant que fichier HTML fixe
-    output_html = "cluster_map.html"
-    fig.write_html(output_html)
+    return  res.to_json()
 
-    return output_html
 
 data_file_path = sys.argv[1]
 nbcluster = int(sys.argv[2])

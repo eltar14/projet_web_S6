@@ -99,23 +99,13 @@ function get($db, $requestRessource)
         }
     }elseif($requestRessource == 'clustering'){
         $nbcluster = intval($_GET['nbcluster']);
-        $d = urldecode($_GET['selectedRows']);
-
-        $clustering = new Clustering();
-        $result = $clustering->cluster($d, $nbcluster);
+        $result = cluster($nbcluster);
 
 
         if (empty($result)) {
-            $data = ["error" => "No result received from the Python script"];
+            $data = ["error" => "Noooo result received from the Python script"];
         } else {
-            $filePath = realpath('../python/' . $result);
-
-            // vérifie si le fichier existe et est lisible
-            if ($filePath && is_readable($filePath)) {
-                $data = ["result" => $filePath];
-            } else {
-                $data = ["error" => "File not found or not readable"];
-            }
+            $data=$result;
         }
     }
 
