@@ -14,7 +14,7 @@ require_once ('Secteur.php');
 require_once ('Feuillage.php');
 require_once ('Prediction.php');
 require_once ('Clustering.php');
-
+require_once ('Deracinement.php');
 
 
 // Connection to the database
@@ -118,10 +118,24 @@ function get($db, $requestRessource)
             $data=$result;
         }
     }
+    else if ($requestRessource == 'Deracinement') {
+        $model_pkl_path = '../python/bocal.pkl';
+        $dataset_json_path = '../python/Data_Arbre.json';
+        $date = date('Y-m-d');
+        $out_html_path = '../python/output/index.html';
+
+        $result = deracinement_script($model_pkl_path, $dataset_json_path, $date, $out_html_path);
+
+        if (empty($result)) {
+            $data = ["error" => "No result received from the Python script"];
+        } else {
+            $data = ["result" => $result, "output_path" => $out_html_path];
+        }
+    }
 
 
 
-    // Envoi de la réponse au client.
+// Envoi de la réponse au client.
     header('Content-Type: application/json; charset=utf-8');
     header('Cache-control: no-store, no-cache, must-revalidate');
     header('Pragma: no-cache');
