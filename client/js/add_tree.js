@@ -234,6 +234,7 @@ function submit_add_tree_form(e){
             '&id_user=' + id_user
         );
         $('#add_tree_form_div_success').show()
+        $('#add_tree_form_div_success').reset();
 
     }
 
