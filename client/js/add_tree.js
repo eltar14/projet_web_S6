@@ -65,7 +65,7 @@ function autocomplete_aux_etat(data){
 }
 $('#etat').on('input',
     () => {
-        ajaxRequest('GET', '../php/requests.php/get_lines_substr_in_etat/', autocomplete_aux_etat, `substring=${$('#stadedev').val()}`);
+        ajaxRequest('GET', '../php/requests.php/get_lines_substr_in_etat/', autocomplete_aux_etat, `substring=${$('#etat').val()}`);
     })
 ;
 
