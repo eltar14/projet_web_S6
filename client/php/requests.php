@@ -12,6 +12,9 @@ require_once ('Nomtech.php');
 require_once ('Ville.php');
 require_once ('Secteur.php');
 require_once ('Feuillage.php');
+require_once ('Prediction.php');
+require_once ('Clustering.php');
+
 
 
 // Connection to the database
@@ -85,6 +88,36 @@ function get($db, $requestRessource)
     }elseif($requestRessource == 'get_id_x_add_etat'){
         $name = $_GET["name"]; // temp pour tests
         $data = Etat::get_id_x_add_etat($name);
+    }elseif($requestRessource == 'prediction'){
+        $d = urldecode($_GET['selectedRows']);
+        $prediction = new Prediction();
+        $result = $prediction->predict($d);
+        if (empty($result)) {
+            $data = "error : No result received from the Python script";
+        } else {
+            $filePath = realpath('../python/' . $result);
+            $data = ["filepath" => $filePath];
+        }
+    }elseif($requestRessource == 'clustering'){
+        $nbcluster = intval($_GET['nbcluster']);
+        $d = urldecode($_GET['selectedRows']);
+
+        $clustering = new Clustering();
+        $result = $clustering->cluster($d, $nbcluster);
+
+
+        if (empty($result)) {
+            $data = ["error" => "No result received from the Python script"];
+        } else {
+            $filePath = realpath('../python/' . $result);
+
+            // vérifie si le fichier existe et est lisible
+            if ($filePath && is_readable($filePath)) {
+                $data = ["result" => $filePath];
+            } else {
+                $data = ["error" => "File not found or not readable"];
+            }
+        }
     }
 
 

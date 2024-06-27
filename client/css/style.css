@@ -759,3 +759,6 @@ form button:hover{
     background-color: #d6eabb;
     cursor: pointer;
 }
+
+
+#map { height: 600px; }
