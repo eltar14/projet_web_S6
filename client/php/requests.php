@@ -90,8 +90,18 @@ function get($db, $requestRessource)
         $data = Etat::get_id_x_add_etat($name);
     }elseif($requestRessource == 'prediction'){
 
-        $d = urldecode($_GET['selectedRows']);
-        $result = predict($d);
+        $d = $_GET['selectedRows'];
+        $selectedRows = array_map('intval', explode(',', $d));
+        $result = Tree::get_all_arbre_by_id($selectedRows);
+        $result = array_map(function($arbre){
+            $arbre['fk_stadedev'] = $arbre['stadedev'];
+            $arbre['fk_nomtech'] = $arbre['nomtech'];
+            unset($arbre['stadedev']);
+            unset($arbre['nomtech']);
+            return $arbre;
+        }, $result);
+        $result = json_encode($result);
+        $result = predict($result);
         if (empty($result)) {
             $data = "error : No result received from the Python script";
         } else {

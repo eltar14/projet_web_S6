@@ -112,7 +112,7 @@ function info_arbre(tab_arbre) {
                 selectedRows.splice(existingIndex, 1);
             }
         }
-        console.log('Sélection:', selectedRows);
+        console.log('Sélection mais que id_arbre:', selectedRows.map(row => row['id_arbre']));
     }
 
     /***
@@ -178,8 +178,7 @@ function info_arbre(tab_arbre) {
         predictionBtn.className = 'btn';
         // handle the click on the prediction button
         predictionBtn.onclick = () => {
-            console.log(selectedRows);
-            ajaxRequest('GET', '../php/requests.php/prediction/', display_tab_age,'selectedRows='+JSON.stringify(selectedRows));
+            ajaxRequest('GET', '../php/requests.php/prediction/', display_tab_age,'selectedRows='+selectedRows.map(row => row['id_arbre']));
         };
         document.querySelector('#pagination').appendChild(predictionBtn);
     }

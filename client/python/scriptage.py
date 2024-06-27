@@ -5,7 +5,7 @@ import numpy as np
 import sys
 from sklearn.metrics import r2_score
 
-def age_estim(data_json, dico):
+def age_estim(data_json, cornichons):
     try:
         data = json.loads(data_json)
 
@@ -13,13 +13,13 @@ def age_estim(data_json, dico):
         X = df[['haut_tronc', 'tronc_diam', 'fk_stadedev', 'clc_nbr_diag', 'fk_nomtech', 'haut_tot']]
         Y = df[['age_estim']]
 
-        X['fk_stadedev'] = pd.DataFrame(dico["encoder"].transform(X[['fk_stadedev']]))
-        X['fk_nomtech'] = pd.DataFrame(dico["encoderlabel"].transform(X[['fk_nomtech']]))
-        X = dico["scaler_feature"].transform(X)
+        X['fk_stadedev'] = pd.DataFrame(cornichons["encoder"].transform(X[['fk_stadedev']]))
+        X['fk_nomtech'] = pd.DataFrame(cornichons["encoderlabel"].transform(X[['fk_nomtech']]))
+        X = cornichons["scaler_feature"].transform(X)
 
-        pred = dico["RandomForest"].predict(X)
+        pred = cornichons["RandomForest"].predict(X)
         pred = pred.reshape(-1, 1)
-        pred = dico["scaler_age"].inverse_transform(pred)
+        pred = cornichons["scaler_age"].inverse_transform(pred)
 
         df['age_estim'] = pred
         #renvoie tout le dataframe formaté en json
@@ -42,8 +42,8 @@ def main():
     with open(data_file_path, 'r') as f:
         data_json = f.read()
     with open("../python/bocal.pkl", "rb") as f:
-        dico = pickle.load(f)
-    age_estim(data_json, dico)
+        cornichons = pickle.load(f)
+    age_estim(data_json, cornichons)
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
