@@ -1,26 +1,67 @@
+
 var map = L.map('map').setView([49.846966079281266, 3.2874275441195704], 13);
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
-
 function callback_map_clusters(data){
+    tab = [];
     data = JSON.parse(data);
-    console.log(data);
-    console.error("AAHAHHAHAHHA");
     //console.log(data);
-    let j = 0;
-    for (let i in data) {
-        if (j<5){
-            console.log(data[i]);
-            j++;
-        }
+    //console.error("AAHAHHAHAHHA");
+    //console.warn(Object.keys(data['latitude']).length)
+
+    let color_array = ['red', 'green', 'blue'];
+    for (let i = 0; i < Object.keys(data['latitude']).length; i++) {
+        //console.log(data["latitude"][i]);
+        L.circle([data["latitude"][i], data["longitude"][i]], {
+            color: color_array[data["cluster"][i]],
+            fillColor: color_array[data["cluster"][i]],
+            fillOpacity: 0.2,
+            radius: (data["tronc_diam"][i]/62.8)
+        }).addTo(map).bindPopup(
+            'Hauteur totale : ' + data["haut_tot"][i] +'m<br>'+
+            'Cluster : ' + data["cluster_name"][i] +'<br>'+
+            'Hauteur tronc : ' + data["haut_tronc"][i] +'m<br>'+
+            'Remarquable : ' + (parseInt(data["remarquable"][i])?'Oui':'Non') +'<br>'+
+            'Feuillage : ' + data["feuillage"][i] +'<br>'+
+            'Stade dev : ' + data["stadedev"][i] +'<br>'+
+            'Secteur : ' + data["clc_secteur"][i] +'<br>'+
+            'Id arbre : ' + data["id_arbre"][i] +'<br>'
+        );
+
+
+
 
     }
+    /*
+    for (i in data){
+        L.circle([data[i]["latitude"], data[i]["longitude"]], {
+            color: 'red',
+            fillColor: '#f03',
+            fillOpacity: 0.2,
+            radius: (data[i]["tronc_diam"]/62.8)
+        }).addTo(map).bindPopup(
+            'Hauteur totale : ' + data[i]["haut_tot"] +'m<br>'+
+            'Hauteur tronc : ' + data[i]["haut_tronc"] +'m<br>'+
+            'Remarquable : ' + (parseInt(data[i]["remarquable"])?'Oui':'Non') +'<br>'+
+            'Feuillage : ' + data[i]["feuillage"] +'<br>'+
+            'Stade dev : ' + data[i]["stadedev"] +'<br>'+
+            'Secteur : ' + data[i]["clc_secteur"] +'<br>'+
+            'Id arbre : ' + data[i]["id_arbre"] +'<br>'
+        );
+    }*/
+}
+
+function display_map_clusters(e){
+    e.preventDefault();
+
+
+
+    let nb_clusters = $('#nb_clusters').val()
+    ajaxRequest('GET', '../php/requests.php/clustering/',callback_map_clusters, 'nbcluster='+nb_clusters);
 }
 
 
 
-window.onload = function () {
-    ajaxRequest('GET', '../php/requests.php/clustering/',callback_map_clusters, 'nbcluster=3');
-}
+

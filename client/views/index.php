@@ -46,7 +46,8 @@
 
 <script rel="script" src="../js/ajax.js"></script>
 <script rel="script" src="../js/script.js"></script>
-<script rel="script" src="../js/main_map.js"></script>
+<script rel="script" src="../js/index.js"></script>
+
 
 
 </html>

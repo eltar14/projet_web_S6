@@ -50,9 +50,8 @@ def clustering(data_file_path, nbcluster):
     data_arbre['cluster_name'] = data_arbre_reduit['cluster_name']
     data_arbre['cluster'] = data_arbre_reduit['cluster']
 
-    res = data_arbre.filter(['id_arbre', 'cluster', 'cluster_name'])
-    res['id_arbre'] = res['id_arbre'].astype(str)
-    res['cluster'] = res['cluster'].astype(str)
+    res = data_arbre
+
 
     return  res.to_json()
 

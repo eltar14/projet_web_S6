@@ -25,5 +25,6 @@ function main_map_callback(data){
 
 
 window.onload = function(){
+    update_connect_state();
     ajaxRequest('GET', '../php/requests.php/info_arbre/',main_map_callback);
 }

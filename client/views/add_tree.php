@@ -19,7 +19,7 @@
         Veuillez vous connecter pour ajouter un arbre.
     </div>
     <div>
-        <form autocomplete="off" id="add_tree_form" class="need_login">
+        <form autocomplete="off" id="add_tree_form" class="need_login" onsubmit="submit_add_tree_form(event)">
 
             <div style="display: flex">
                 <label for="longitude">Longitude :</label>
@@ -166,6 +166,7 @@
 
 <script rel="script" src="../js/ajax.js"></script>
 <script rel="script" src="../js/script.js"></script>
+<script rel="script" src="../js/add_tree.js"></script>
 
 
 </html>
