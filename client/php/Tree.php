@@ -190,7 +190,7 @@ class Tree
             }
              $db = DB::connexion();
              //requete sql je veux recuperer l'id arbre haut_tot tronc diam nomtech stadedev haut tronc clc nbr diag par id arbre
-                $request = 'SELECT arbre.id_arbre,arbre.age_estim,arbre.longitude,arbre.latitude,arbre.revetement,arbre.haut_tot, arbre.haut_tronc, arbre.tronc_diam, arbre.clc_nbr_diag,stadedev.stadedev, nomtech.nomtech, e.arb_etat, p.port, p2.pied, s.situaton, v.villeca, u.nom_user,u.prenom_user, se.clc_secteur, f.feuillage
+                $request = 'SELECT arbre.id_arbre,arbre.longitude,arbre.latitude,arbre.revetement,arbre.haut_tot, arbre.haut_tronc, arbre.tronc_diam, arbre.clc_nbr_diag,stadedev.stadedev, nomtech.nomtech, e.arb_etat, p.port, p2.pied, s.situaton, v.villeca, u.nom_user,u.prenom_user, se.clc_secteur, f.feuillage
                             FROM arbre
                             JOIN stadedev ON arbre.id_stadedev = stadedev.id_stadedev
                             JOIN nomtech ON arbre.id_nomtech = nomtech.id_nomtech
