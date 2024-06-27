@@ -227,36 +227,43 @@ function info_arbre(tab_arbre) {
     createPaginationControls();
 }
 
-function display_tab_age(tab){
+function display_tab_age(tab) {
     tab = JSON.parse(tab);
-    console.log(tab)
+    console.log(tab);
     const tableBody = document.querySelector('#result_age_tab');
     tableBody.innerHTML = '';
-    const tr = document.createElement('tr');
+
+    // Create table header row
+    const headerRow = document.createElement('tr');
     for (const key in tab[0]) {
         const th = document.createElement('th');
-        th.textContent = key;
-        tr.appendChild(th);
-
+        if (key.startsWith('age_estim')) {
+            // Add model name to header
+            th.textContent = key.replace('age_estim_', '');
+        } else {
+            th.textContent = key;
+        }
+        headerRow.appendChild(th);
     }
-    tableBody.appendChild(tr);
+    tableBody.appendChild(headerRow);
+
+    // Create table body rows
     tab.forEach(arbre => {
         const tr = document.createElement('tr');
         for (const key in arbre) {
             const td = document.createElement('td');
-            // round age_estim
-            if (key === 'age_estim') {
+            if (key.startsWith('age_estim')) {
+                // Round age_estim values
                 td.textContent = Math.round(arbre[key]);
-                tr.appendChild(td);
-                continue;
+            } else {
+                td.textContent = arbre[key];
             }
-            td.textContent = arbre[key];
             tr.appendChild(td);
         }
         tableBody.appendChild(tr);
-
     });
 }
+
 
 window.onload = function () {
     update_connect_state();

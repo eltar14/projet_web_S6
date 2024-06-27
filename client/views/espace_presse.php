@@ -24,10 +24,10 @@
 
 <section id="intro" class="main_content">
     <h1>
-        Patrimoine arboré de la ville de Saint Quentin (02)
+        Bagnoles 🏎️
     </h1>
     <hr>
-    <h2>Introduction</h2>
+    <h2>Vroum Vroummmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm YIIPPEEEEEEEEE</h2>
     <p>No problem! Here's the information about the Mercedes CLR GTR:
 
         The Mercedes CLR GTR is a remarkable racing car celebrated for its outstanding performance and sleek design. Powered by a potent 6.0-liter V12 engine, it delivers over 600 horsepower.
@@ -38,14 +38,12 @@
 
         Originally priced at around $1.5 million, the Mercedes CLR GTR is considered one of the most exclusive and prestigious racing cars ever produced. 💰
 
-        Its limited production run of just five units adds to its rarity, making it highly sought after by racing enthusiasts and collectors worldwide. 🌎n! </p>
+        Its limited production run of just five units adds to its rarity, making it highly sought after by racing enthusiasts and collectors worldwide. 🌎n!</p>
+        <p>My mom let me plays fornite and drink cola YYYYIIIIPPPPPPPEEEEEEEEEE</p>
+        <p>MIATTTTAAAA MAZZDDAAAAA NISSSSSAAAANNNNNNNN TOYOTAAAAAAA</p>
+
 </section>
 
-
-<section class="main_content">
-    <h2>Carte</h2>
-    <div id="map"></div>
-</section>
 
 
 </body>
