@@ -9,9 +9,9 @@ $navbar = '
         </a>
 
         <div class="nav-right">
-            <a href="'.$site_root.'/controllers/#">Carte</a>
+            <a href="'.$site_root.'/controllers/tree_tab.php">Arbres et Carte</a>
             <a href="'.$site_root.'/controllers/add_tree.php">Ajouter arbre</a>
-            <a href="'.$site_root.'/controllers/#">BBBB</a>
+            <a href="'.$site_root.'/controllers/#"></a>
 <!-- <a href="'.$site_root.'/controllers/#" class="disconnect">Disconnect</a> -->
                  <button id="open-button" onclick="openForm()">Connexion</button>
 

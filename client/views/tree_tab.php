@@ -15,6 +15,36 @@
 <body>
 
 <section class='main_content'>
+    <h2>Formulaire de Tri</h2>
+    <form>
+        <label for="criteria">Critère de tri :</label>
+        <select id="criteria" name="criteria">
+            <option value="id_arbre">Arbre</option>
+
+            <option value="haut_tot">Hauteur Totale</option>
+            <option value="haut_tronc">Hauteur du Tronc</option>
+            <option value="tronc_diam">Diamètre du Tronc</option>
+            <option value="age_estim">Âge Estimé</option>
+            <option value="clc_nbr_diag">Nombre de Diagnostics</option>
+            <option value="remarquable">Remarquable</option>
+            <option value="arb_etat">État de l'Arbre</option>
+            <option value="stadedev">Stade de Développement</option>
+            <option value="nomtech">Nom Technique</option>
+            <option value="clc_secteur">Secteur</option>
+            <option value="feuillage">Feuillage</option>
+        </select>
+
+        <label for="order">Ordre de tri :</label>
+        <select id="order" name="order">
+            <option value="croissant">Croissant</option>
+            <option value="décroissant">Décroissant</option>
+        </select>
+
+        <button type="button" id="sortButton">Trier</button>
+        <button type="button" id="resetButton">Annuler</button>
+    </form>
+
+    </br>
 <table id="arbre_info">
 
 </table>
@@ -29,5 +59,6 @@
 
 <script rel="script" src="../js/ajax.js"></script>
 <script rel="script" src="../js/script.js"></script>
+
 
 </html>

@@ -61,7 +61,7 @@ class Tree
     JOIN 
         secteur se ON a.id_secteur = se.id_secteur
     JOIN 
-        feuillage f ON a.id_feuillage = f.id_feuillage ORDER BY id_arbre LIMIT 100;
+        feuillage f ON a.id_feuillage = f.id_feuillage ORDER BY id_arbre;
     ");
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);

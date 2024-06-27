@@ -11,11 +11,11 @@ def age_estim(data_json, dico):
         print("Data JSON:", data)  # Message de débogage
 
         df = pd.DataFrame(data)
-        X = df[['haut_tronc', 'tronc_diam', 'fk_stadedev', 'clc_nbr_diag', 'fk_nomtech', 'haut_tot']]
+        X = df[['haut_tronc', 'tronc_diam', 'stadedev', 'clc_nbr_diag', 'nomtech', 'haut_tot']]
         Y = df[['age_estim']]
 
-        X['fk_stadedev'] = pd.DataFrame(dico["encoder"].transform(X[['fk_stadedev']]))
-        X['fk_nomtech'] = pd.DataFrame(dico["encoderlabel"].transform(X[['fk_nomtech']]))
+        X['stadedev'] = pd.DataFrame(dico["encoder"].transform(X[['stadedev']]))
+        X['nomtech'] = pd.DataFrame(dico["encoderlabel"].transform(X[['nomtech']]))
         X = dico["scaler_feature"].transform(X)
 
         pred = dico["RandomForest"].predict(X)
@@ -40,7 +40,7 @@ def main():
     data_file_path = sys.argv[1]
     with open(data_file_path, 'r') as f:
         data_json = f.read()
-    with open("cornichon.pkl", "rb") as f:
+    with open("bocal.pkl", "rb") as f:
         dico = pickle.load(f)
     result = age_estim(data_json, dico)
     print(result)

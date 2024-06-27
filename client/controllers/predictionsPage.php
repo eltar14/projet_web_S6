@@ -1,8 +1,7 @@
 <?php
 require_once "../views/nav.php";
 require_once "../views/footer.php";
-
-require_once "../views/predictionsPage.php";
+require_once ('../php/Prediction.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     header('Content-Type: application/json');
@@ -13,14 +12,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     }
 
     $data = urldecode($_GET['selectedRows']);
-    $prediction = new Prediction();
-    $result = $prediction->predict($data);
+    error_log($data);
+    error_log("aaaaaaa pourquoiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
+    $result = predict($data);
 
-    if (empty($result)) {
-        echo json_encode(["error" => "No result received from the Python script"]);
-    } else {
-        $filePath = realpath('../python/' . $result);
-        echo json_encode(["result" => $filePath]);
-    }
+
 }
 ?>
