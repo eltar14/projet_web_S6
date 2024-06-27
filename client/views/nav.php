@@ -10,6 +10,7 @@ $navbar = '
 
         <div class="nav-right">
             <a href="'.$site_root.'/controllers/tree_tab.php">Arbres et Carte</a>
+            <a href="'.$site_root.'/controllers/clusters.php">Carte clusters</a>
             <a href="'.$site_root.'/controllers/add_tree.php">Ajouter arbre</a>
             <a href="'.$site_root.'/controllers/#"></a>
 <!-- <a href="'.$site_root.'/controllers/#" class="disconnect">Disconnect</a> -->

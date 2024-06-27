@@ -22,7 +22,16 @@
 
 <body>
 <section class="main_content">
-    <h1>LES CLUSTEEERRS</h1>
+    <h1>LES CLUSTERS</h1>
+    <div>
+        <form onsubmit="display_map_clusters(event)">
+            <label for="nb_clusters">Nombre de clusters :</label>
+            <input type="number" id="nb_clusters" name="nb_clusters" min="2" max="3" required class="required">
+
+            <button type="submit" id="display_cluster_map_button">Afficher la carte</button>
+
+        </form>
+    </div>
     <div id="map"></div>
 
 </section>
