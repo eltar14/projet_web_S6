@@ -6,12 +6,13 @@ accès au site: racine/client/controllers/index.php
 - Tom LELIEVRE (TaMLeNok)
 - Nathan SIMON (JuicyBBP)
 
-Rendu intermédiaire dans le répertoire infos
+Rendus dans le répertoire infos
 - MCD
 - MLD
 - Visuels
 - Répartition des tâches
 - Interfaces
+- pptx présentation
 
 
 Lien pour accéder au site : http://etu1108.projets.isen-ouest.fr/client/controllers/
