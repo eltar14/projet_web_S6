@@ -7946,6 +7946,6 @@ VALUES
     (49.86150333402243, 3.301788333512451, 3.0, 2.0, 15.0, 0, 0.0, 0, 1, 1, 6, 1, 3, 40, 1, 240, 1);
 
 INSERT INTO role_user(role_user) VALUES('Admin');
-#INSERT INTO etu1110.user(nom_user,prenom_user,password_user,email_user,id_role_user) VALUES('LE BOULCH','Antoine','1234','anto@isen.fr',1);
-#INSERT INTO etu1108.user(nom_user,prenom_user,password_user,email_user,id_role_user) VALUES('Lelievre','Tom','1234','tom@isen.fr',1);
-INSERT INTO etu1119.user(nom_user,prenom_user,password_user,email_user,id_role_user) VALUES('nathan','nathan','1234','nathan@isen.fr',1);
+INSERT INTO `user`(nom_user,prenom_user,password_user,email_user,id_role_user) VALUES('LE BOULCH','Antoine','1234','anto@isen.fr',1);
+INSERT INTO `user`(nom_user,prenom_user,password_user,email_user,id_role_user) VALUES('Lelievre','Tom','1234','tom@isen.fr',1);
+INSERT INTO `user`(nom_user,prenom_user,password_user,email_user,id_role_user) VALUES('nathan','nathan','1234','nathan@isen.fr',1);
