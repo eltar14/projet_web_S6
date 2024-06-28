@@ -3,6 +3,14 @@ require_once '../../DB.php';
 
 class User
 {
+    /**
+     *
+     * return id_user si le couple id mdp est valide.
+     * TODO : chiffrer les mdp dans la BDD
+     * @param $email
+     * @param $password
+     * @return mixed
+     */
     static function authenticate($email, $password)
     {
         $db = DB::connexion();

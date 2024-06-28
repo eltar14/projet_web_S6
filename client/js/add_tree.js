@@ -1,4 +1,5 @@
 // SCRIPT AUTOCOMPLETION
+// documentation :
 /* https://www.w3schools.com/howto/howto_js_autocomplete.asp */
 /*execute a function when someone clicks in the document:*/
 function autocomplete(inp, arr) {
