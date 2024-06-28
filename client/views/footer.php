@@ -60,7 +60,7 @@ $footer = "
         <div>
             <ul>
                 <li>
-                    ©2023 CIR26C
+                    ©2024 CIR26C - Antoine LE BOULCH - Tom LELIEVRE - Nathan SIMON
                 </li>
                 <li>
                     <a href='#'>Mentions légales</a>

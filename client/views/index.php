@@ -2,7 +2,7 @@
 <html lang="fr" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>OEE LES ARBRES</title>
+    <title>Patrimoine arboré</title>
     <link rel="icon" type="image/x-icon" href="/client/views/img/logo.png">
     <!--    Our styles-->
     <link rel="stylesheet" href="../css/style.css">

@@ -1,5 +1,5 @@
 // SCRIPT AUTOCOMPLETION
-/* https://www.w3schools.com/howto/howto_js_autocomplete.asp*/
+/* https://www.w3schools.com/howto/howto_js_autocomplete.asp */
 /*execute a function when someone clicks in the document:*/
 function autocomplete(inp, arr) {
     //console.warn(arr)
@@ -7,7 +7,6 @@ function autocomplete(inp, arr) {
     the text field element and an array of possible autocompleted values:*/
     var currentFocus;
     /*execute a function when someone writes in the text field:*/
-
 
     var a, b, i, val = inp.value;
     /*close any already open lists of autocompleted values*/
@@ -25,9 +24,6 @@ function autocomplete(inp, arr) {
         /*check if the item starts with the same letters as the text field value:*/
         /*create a DIV element for each matching element:*/
         b = document.createElement("DIV");
-        /*make the matching letters bold:*/
-        /*b.innerHTML = "<strong>" + arr[i].substring(0, val.length) + "</strong>";
-        b.innerHTML += arr[i].substring(val.length);*/
         b.innerHTML += arr[i]
         /*insert a input field that will hold the current array item's value:*/
         b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";

@@ -29,10 +29,6 @@ function callback_map_clusters(data){
             'Secteur : ' + data["clc_secteur"][i] +'<br>'+
             'Id arbre : ' + data["id_arbre"][i] +'<br>'
         );
-
-
-
-
     }
     /*
     for (i in data){

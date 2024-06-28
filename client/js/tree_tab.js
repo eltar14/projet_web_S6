@@ -262,9 +262,40 @@ function display_tab_age(tab) {
         }
         tableBody.appendChild(tr);
     });
+
+    create_age_map(tab)
 }
 
+function create_age_map(data){
+    //TODO a appeler dans la callback du dessus
 
+    var map = L.map('map').setView([49.846966079281266, 3.2874275441195704], 13);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+
+    for (let i = 0; i < Object.keys(data[0]).length; i++) {
+        //console.log(data["latitude"][i]);
+        L.circle([data[i]["latitude"], data[i]["longitude"]], {
+            color: 'red',
+            fillColor: 'red',
+            fillOpacity: 0.2,
+            radius: (data[i]["tronc_diam"]/62.8)
+        }).addTo(map).bindPopup(
+            'Hauteur totale : ' + data[i]["haut_tot"] +'m<br>'+
+            'Hauteur tronc : ' + data[i]["haut_tronc"] +'m<br>'+
+            'Remarquable : ' + (parseInt(data[i]["remarquable"])?'Oui':'Non') +'<br>'+
+            'Feuillage : ' + data[i]["feuillage"] +'<br>'+
+            'Stade dev : ' + data[i]["stadedev"] +'<br>'+
+            'Secteur : ' + data[i]["clc_secteur"] +'<br>'+
+            'Id arbre : ' + data[i]["id_arbre"] +'<br>'
+        );
+    }
+
+
+}
 window.onload = function () {
     update_connect_state();
     ajaxRequest('GET', '../php/requests.php/info_arbre/',info_arbre);
