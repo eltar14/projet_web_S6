@@ -1,57 +1,60 @@
-/***
- * Function to display the information of the trees in the table
+/**
+ * Fonction qui affiche les informations des arbres (callback de la requête AJAX)
+ * Il y a aussi les fonctions de pagination et de filtres de trie des arbres et de prédiction de l'âge
+ *
  * @param tab_arbre
  */
 function info_arbre(tab_arbre) {
-    // Change keys in the data
+    // On remplace les clés 'stadedev' et 'nomtech' par 'fk_stadedev' et 'fk_nomtech' respectivement
+    // On fait cela pour adapter les clés aux noms des colonnes de la table 'arbre' pour le script de prédiction
     const updatedTabArbre = tab_arbre.map(arbre => {
         return {
-            ...arbre,
+            ...arbre, // spread operator pour copier les autres clés et valeurs https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Operators/Spread_syntax
             'fk_stadedev': arbre['stadedev'],
             'fk_nomtech': arbre['nomtech']
         };
     });
-    //remove the keys that are not needed
+
+    // On supprime les clés 'stadedev' et 'nomtech' pour ne pas les afficher dans le tableau
     updatedTabArbre.forEach(arbre => {
         delete arbre['stadedev'];
         delete arbre['nomtech'];
     });
 
-    const table = document.querySelector('#arbre_table'); // table element
+    // On récupère les éléments du DOM
+    // et on initialise les variables pour la pagination et le tri des arbres
     const tableBody = document.querySelector('#arbre_info');
-    const itemsPerPage = 10; // number of items per page
-    let currentPage = 1; // current page
-    let selectedRows = []; // selected rows
-    let sortedTabArbre = [...updatedTabArbre]; // copy of the tabArbre with spread operator
-    const originalTabArbre = [...updatedTabArbre]; // Save the original data will be used to reset the sort
+    const itemsPerPage = 10;
+    let currentPage = 1;
+    let selectedRows = [];
+    let sortedTabArbre = [...updatedTabArbre]; // une copie du tableau des arbres pour le tri
+    const originalTabArbre = [...updatedTabArbre]; // une copie du tableau des arbres pour la réinitialisation
 
-    // https://geeklecode.com/loperateur-spread-en-javascript-va-vous-simplifier-la-vie/
-
-    /***
-     * Function to clear the table body
+    /**
+     * Fonction qui vide le corps du tableau
      */
     function clearTableBody() {
         tableBody.innerHTML = '';
     }
 
-    /***
-     * Function to handle the click on the checkbox
-     * @param arbre  // table
-     * @param isChecked // boolean
+    /**
+     * Fonction qui selectionne ou déselectionne un arbre et l'ajoute ou le retire du tableau des arbres sélectionnés
+     * @param arbre
+     * @param isChecked // true si l'arbre est sélectionné, false sinon
      */
     function handleCheckboxClick(arbre, isChecked) {
-        const arbreId = arbre['id_arbre'];
-        const existingIndex = selectedRows.findIndex(row => row['id_arbre'] === arbreId); // find the index of the selected row
+        const arbreId = arbre['id_arbre']; // l'id de l'arbre
+        const existingIndex = selectedRows.findIndex(row => row['id_arbre'] === arbreId); // l'index de l'arbre dans le tableau des arbres sélectionnés
 
-        // if the checkbox is checked and the row is not already selected, add the row to the selected rows
-        // exisitingIndex === -1 means that the row is not already selected no existing row in selectedRows
+        // Si l'arbre est sélectionné et n'existe pas dans le tableau des arbres sélectionnés, on l'ajoute
         if (isChecked) {
+            // Si l'arbre n'existe pas dans le tableau des arbres sélectionnés, on l'ajoute
             if (existingIndex === -1) {
-                selectedRows.push(arbre);
+                selectedRows.push(arbre); // on ajoute l'arbre au tableau des arbres sélectionnés
                 console.log('Ajouté:', arbre);
             }
         } else {
-            // if the checkbox is unchecked and the row is already selected, remove the row from the selected rows
+            // Si l'arbre existe dans le tableau des arbres sélectionnés, on le retire
             if (existingIndex !== -1) {
                 console.log('Retiré:', selectedRows[existingIndex]);
                 selectedRows.splice(existingIndex, 1);
@@ -60,31 +63,32 @@ function info_arbre(tab_arbre) {
         console.log('Sélection mais que id_arbre:', selectedRows.map(row => row['id_arbre']));
     }
 
-    /***
-     * Function to display the page create table headers and rows with pagination
+    /**
+     * Fonction qui affiche la page demandée
      * @param page
      */
     function displayPage(page) {
         clearTableBody();
 
-        const start = (page - 1) * itemsPerPage; // start index
-        const end = start + itemsPerPage; // end index
-        const paginatedItems = sortedTabArbre.slice(start, end); // get the items for the current page
+        // On initialise les variables pour la pagination
+        const start = (page - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+        const paginatedItems = sortedTabArbre.slice(start, end);
 
+        // Création des entêtes du tableau
         const tableHeaders = document.createElement('tr');
-        // create the table headers
         for (const key in paginatedItems[0]) {
             const th = document.createElement('th');
             th.textContent = key;
             tableHeaders.appendChild(th);
         }
-        // create the checkbox header
+        // Ajout de l'entête pour la case à cocher
         const thCheckbox = document.createElement('th');
         thCheckbox.textContent = 'Prédire l\'âge';
         tableHeaders.appendChild(thCheckbox);
         tableBody.appendChild(tableHeaders);
 
-        // create the table rows
+        // Création des lignes du tableau
         paginatedItems.forEach((arbre) => {
             const tr = document.createElement('tr');
             for (const key in arbre) {
@@ -93,84 +97,128 @@ function info_arbre(tab_arbre) {
                 } else if ((key === 'remarquable' || key === 'revetement') && arbre[key] === '0') {
                     arbre[key] = 'Non';
                 }
-                // create the table data
                 const td = document.createElement('td');
                 td.textContent = arbre[key];
                 tr.appendChild(td);
             }
-            // create the checkbox
+            // Ajout de la case à cocher
             const tdCheckbox = document.createElement('td');
             const checkbox = document.createElement('input');
             checkbox.type = 'checkbox';
-            // check if the row is already selected
-            checkbox.checked = selectedRows.some(row => row['id_arbre'] === arbre['id_arbre']);
-            // handle the click on the checkbox
-            checkbox.onchange = (event) => handleCheckboxClick(arbre, event.target.checked);
-            tdCheckbox.appendChild(checkbox);
+            checkbox.checked = selectedRows.some(row => row['id_arbre'] === arbre['id_arbre']); // on coche la case si l'arbre est déjà sélectionné
+            checkbox.onchange = (event) => handleCheckboxClick(arbre, event.target.checked); // on gère le changement d'état de la case à cocher
+            tdCheckbox.appendChild(checkbox); // on ajoute la case à cocher à la cellule
             tr.appendChild(tdCheckbox);
             tableBody.appendChild(tr);
         });
     }
 
-    /***
-     * Function to create the prediction button and do the get request to the predictions page
-     *
+    /**
+     * Fonction de filtrage des arbres
+     */
+    function applyFilters() {
+
+        // On récupère les valeurs des filtres
+        const revetementFilter = document.getElementById("filter_revetement").value;
+        const remarquableFilter = document.getElementById("filter_remarquable").value;
+        const arbEtatFilter = document.getElementById("filter_arb_etat").value;
+        const portFilter = document.getElementById("filter_port").value;
+        const situationFilter = document.getElementById("filter_situation").value;
+        const clcSecteurFilter = document.getElementById("filter_clc_secteur").value;
+        const feuillageFilter = document.getElementById("filter_feuillage").value;
+        const stadedevFilter = document.getElementById("filter_stadedev").value;
+        const nomtechFilter = document.getElementById("filter_nomtech").value;
+
+        // On filtre les arbres en fonction des valeurs des filtres
+        sortedTabArbre = originalTabArbre.filter(arbre => {
+            return (
+                (!revetementFilter || arbre.revetement === revetementFilter) &&
+                (!remarquableFilter || arbre.remarquable === remarquableFilter) &&
+                (!arbEtatFilter || arbre.arb_etat === arbEtatFilter) &&
+                (!portFilter || arbre.port === portFilter) &&
+                (!situationFilter || arbre.situaton === situationFilter) &&
+                (!clcSecteurFilter || arbre.clc_secteur === clcSecteurFilter) &&
+                (!feuillageFilter || arbre.feuillage === feuillageFilter) &&
+                (!stadedevFilter || arbre.fk_stadedev === stadedevFilter) &&
+                (!nomtechFilter || arbre.fk_nomtech === nomtechFilter)
+            );
+        });
+
+        // On affiche et on pagine les arbres filtrés
+        displayPage(currentPage);
+        createPaginationControls();
+    }
+
+    /**
+     * Fonction pour créer le bouton de prédiction
      */
     function createPredictionButton() {
-        // create the prediction button
         const predictionBtn = document.createElement('button');
         predictionBtn.textContent = 'Prédire l\'âge';
         predictionBtn.className = 'btn';
-        // handle the click on the prediction button
+        // On envoie les id_arbre des arbres sélectionnés pour la prédiction
         predictionBtn.onclick = () => {
-            ajaxRequest('GET', '../php/requests.php/prediction/', display_tab_age,'selectedRows='+selectedRows.map(row => row['id_arbre']));
+            ajaxRequest('GET', '../php/requests.php/prediction/', display_tab_age, 'selectedRows=' + selectedRows.map(row => row['id_arbre']));
+            $('#tab_age').show();
+
         };
         document.querySelector('#pagination').appendChild(predictionBtn);
     }
 
-    /***
-     * Function to create the pagination controls
+    /**
+     * Fonction pour créer les contrôles de pagination
      */
     function createPaginationControls() {
         const paginationContainer = document.querySelector('#pagination');
         paginationContainer.innerHTML = '';
-        // create the previous button
+        const paginationInfo = document.querySelector('#pagination-info');
+        const totalPages = Math.ceil(sortedTabArbre.length / itemsPerPage);
+
         const prevBtn = document.createElement('button');
         prevBtn.textContent = 'Précédent';
         prevBtn.className = 'btn';
-        // handle the click on the previous button
         prevBtn.onclick = () => {
             if (currentPage > 1) {
                 currentPage--;
                 displayPage(currentPage);
+                updatePaginationInfo();
             }
         };
         paginationContainer.appendChild(prevBtn);
-        // create the next button
+
         const nextBtn = document.createElement('button');
         nextBtn.textContent = 'Suivant';
         nextBtn.className = 'btn';
-        // handle the click on the next button
         nextBtn.onclick = () => {
-            // check if the current page is less than the total number of pages
-            if (currentPage < Math.ceil(sortedTabArbre.length / itemsPerPage)) {
+            if (currentPage < totalPages) {
                 currentPage++;
                 displayPage(currentPage);
+                updatePaginationInfo();
             }
         };
-
         paginationContainer.appendChild(nextBtn);
+
         createPredictionButton();
+        updatePaginationInfo();
     }
 
-    /***
-     * Function to sort the table based on the selected criteria and order
+    /**
+     * Fonction pour mettre à jour les informations de pagination
+     */
+    function updatePaginationInfo() {
+        const paginationInfo = document.querySelector('#pagination-info');
+        const totalPages = Math.ceil(sortedTabArbre.length / itemsPerPage);
+        paginationInfo.textContent = `Page ${currentPage} sur ${totalPages}`;
+    }
+
+    /**
+     * Fonction de trie des arbres
      */
     function sortTable() {
         const criteria = document.getElementById("criteria").value;
         const order = document.getElementById("order").value;
 
-        // create an index for the columns for each criteria
+
         const columnIndex = {
             "id_arbre": "id_arbre",
             "haut_tot": "haut_tot",
@@ -180,65 +228,124 @@ function info_arbre(tab_arbre) {
             "clc_nbr_diag": "clc_nbr_diag",
             "remarquable": "remarquable",
             "arb_etat": "arb_etat",
-            "fk_stadedev": "fk_stadedev",  // updated key
-            "fk_nomtech": "fk_nomtech",    // updated key
+            "fk_stadedev": "fk_stadedev",
+            "fk_nomtech": "fk_nomtech",
             "clc_secteur": "clc_secteur",
             "feuillage": "feuillage"
         };
 
-        // sort the table based on the selected criteria and order, arguments are the two rows to compare
+        // On trie le tableau des arbres en fonction du critère et de l'ordre choisis
+        // a ici est un objet de type arbre
+        // b ici est un objet de type arbre
         sortedTabArbre.sort((a, b) => {
-            // get the text of the two rows for the selected criteria
             let aText = a[columnIndex[criteria]];
             let bText = b[columnIndex[criteria]];
 
-            // check if the text is a number
+            // On convertit les valeurs en nombre si ce sont des nombres
             if (!isNaN(parseFloat(aText)) && !isNaN(parseFloat(bText))) {
-                // convert the text to a number
                 aText = parseFloat(aText);
                 bText = parseFloat(bText);
             }
-            // check the order
+            // On trie en fonction de l'ordre choisi
             if (order === "croissant") {
-                return aText > bText ? 1 : -1; // sort in ascending order
+                return aText > bText ? 1 : -1; // Si aText est plus grand que bText, on retourne 1, sinon -1
             } else {
-                return aText < bText ? 1 : -1; // sort in descending order
+                return aText < bText ? 1 : -1; // Si aText est plus petit que bText, on retourne 1, sinon -1
             }
         });
 
-        displayPage(currentPage); // display the current page
+        displayPage(currentPage);
     }
 
-    /***
-     * Function to reset the table to the original state
-     */
+    // Fonction pour réinitialiser le tableau
     function resetTable() {
-        sortedTabArbre = [...originalTabArbre];
+        sortedTabArbre = [...originalTabArbre]; // On réinitialise le tableau des arbres
         currentPage = 1;
         displayPage(currentPage);
         createPaginationControls();
     }
 
-    // handle the click on the sort button
+    // Fonction pour afficher les options de filtre
+    function populateFilterOptions() {
+        const revetementFilter = document.getElementById("filter_revetement");
+        const remarquableFilter = document.getElementById("filter_remarquable");
+        const arbEtatFilter = document.getElementById("filter_arb_etat");
+        const portFilter = document.getElementById("filter_port");
+        const situationFilter = document.getElementById("filter_situation");
+        const clcSecteurFilter = document.getElementById("filter_clc_secteur");
+        const feuillageFilter = document.getElementById("filter_feuillage");
+        const stadedevFilter = document.getElementById("filter_stadedev");
+        const nomtechFilter = document.getElementById("filter_nomtech");
+
+        // Fonction pour récupérer les valeurs uniques d'une colonne
+        //https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Set
+        const uniqueValues = (array, key) => [...new Set(array.map(item => item[key]))];
+
+        // Fonction pour créer une option
+        const createOption = (value) => {
+
+            const option = document.createElement("option");
+            option.value = value;
+            // On remplace les valeurs 1 et 0 par Oui et Non
+            if (value === "1") {
+                value = "Oui";
+            } else if (value === "0") {
+                value = "Non";
+            }
+            option.text = value;
+            return option;
+        };
+
+        // Fonction pour ajouter les options à un select
+        const addOptionsToSelect = (select, values) => {
+            const emptyOption = document.createElement("option");
+            emptyOption.value = "";
+            emptyOption.text = "Tous";
+            select.appendChild(emptyOption);
+
+            values.forEach(value => select.appendChild(createOption(value)));
+        };
+
+        // On récupère les valeurs uniques de chaque colonne et on les ajoute aux options de filtre
+        addOptionsToSelect(revetementFilter, uniqueValues(originalTabArbre, "revetement"));
+        addOptionsToSelect(remarquableFilter, uniqueValues(originalTabArbre, "remarquable"));
+        addOptionsToSelect(arbEtatFilter, uniqueValues(originalTabArbre, "arb_etat"));
+        addOptionsToSelect(portFilter, uniqueValues(originalTabArbre, "port"));
+        addOptionsToSelect(situationFilter, uniqueValues(originalTabArbre, "situaton"));
+        addOptionsToSelect(clcSecteurFilter, uniqueValues(originalTabArbre, "clc_secteur"));
+        addOptionsToSelect(feuillageFilter, uniqueValues(originalTabArbre, "feuillage"));
+        addOptionsToSelect(stadedevFilter, uniqueValues(originalTabArbre, "fk_stadedev"));
+        addOptionsToSelect(nomtechFilter, uniqueValues(originalTabArbre, "fk_nomtech"));
+    }
+
+    // Applique les tris ou reset sur appui du bouton
     document.getElementById('sortButton').onclick = sortTable;
     document.getElementById('resetButton').onclick = resetTable;
-    //
+
+    populateFilterOptions();
     displayPage(currentPage);
     createPaginationControls();
+
+    // Ajout des événements onchange pour les filtres après le chargement de la page
+    document.querySelectorAll('#filters select').forEach(select => {
+        select.onchange = applyFilters;
+    });
 }
 
+/**
+ * Fonction pour afficher les arbres en fonction de l'âge
+ * @param tab
+ */
 function display_tab_age(tab) {
     tab = JSON.parse(tab);
     console.log(tab);
     const tableBody = document.querySelector('#result_age_tab');
     tableBody.innerHTML = '';
 
-    // Create table header row
     const headerRow = document.createElement('tr');
     for (const key in tab[0]) {
         const th = document.createElement('th');
         if (key.startsWith('age_estim')) {
-            // Add model name to header
             th.textContent = key.replace('age_estim_', '');
         } else {
             th.textContent = key;
@@ -247,14 +354,12 @@ function display_tab_age(tab) {
     }
     tableBody.appendChild(headerRow);
 
-    // Create table body rows
     tab.forEach(arbre => {
         const tr = document.createElement('tr');
         for (const key in arbre) {
             const td = document.createElement('td');
             if (key.startsWith('age_estim')) {
-                // Round age_estim values
-                td.textContent = Math.round(arbre[key]);
+                td.textContent = Math.round(arbre[key]); // On arrondit l'âge estimé au supérieur
             } else {
                 td.textContent = arbre[key];
             }
@@ -275,7 +380,7 @@ function create_age_map(data){
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
 
-
+// requête ajax pour récupérer les arbres en fonction de l'âge au chargement de la page
     for (let i = 0; i < Object.keys(data[0]).length; i++) {
         //console.log(data["latitude"][i]);
         L.circle([data[i]["latitude"], data[i]["longitude"]], {
@@ -298,5 +403,5 @@ function create_age_map(data){
 }
 window.onload = function () {
     update_connect_state();
-    ajaxRequest('GET', '../php/requests.php/info_arbre/',info_arbre);
+    ajaxRequest('GET', '../php/requests.php/info_arbre/', info_arbre);
 }

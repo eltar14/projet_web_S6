@@ -27,7 +27,6 @@
         <label for="criteria">Critère de tri :</label>
         <select id="criteria" name="criteria">
             <option value="id_arbre">Arbre</option>
-
             <option value="haut_tot">Hauteur Totale</option>
             <option value="haut_tronc">Hauteur du Tronc</option>
             <option value="tronc_diam">Diamètre du Tronc</option>
@@ -51,20 +50,48 @@
         <button type="button" id="resetButton">Annuler</button>
     </form>
 
-    </br>
-<table id="arbre_info">
+    <br/>
 
-</table>
-    <div id="pagination">
+    <h2>Filtres</h2>
+    <div id="filters">
+        <label for="filter_revetement">Revetement:</label>
+        <select id="filter_revetement"></select>
+
+        <label for="filter_remarquable">Remarquable:</label>
+        <select id="filter_remarquable"></select>
+
+        <label for="filter_arb_etat">État de l'Arbre:</label>
+        <select id="filter_arb_etat"></select>
+
+        <label for="filter_port">Port:</label>
+        <select id="filter_port"></select>
+
+        <label for="filter_situation">Situation:</label>
+        <select id="filter_situation"></select>
+
+        <label for="filter_clc_secteur">Secteur:</label>
+        <select id="filter_clc_secteur"></select>
+
+        <label for="filter_feuillage">Feuillage:</label>
+        <select id="filter_feuillage"></select>
+
+        <label for="filter_stadedev">Stade de Développement:</label>
+        <select id="filter_stadedev"></select>
+
+        <label for="filter_nomtech">Nom Technique:</label>
+        <select id="filter_nomtech"></select>
+
     </div>
 
+    <table id="arbre_info"></table>
+    <div id="pagination"></div>
+    <div id="pagination-info" style="float:right "></div> <!-- Ajouté pour afficher les informations de pagination -->
 </section>
 
-<section class="main_content">
+<section class="main_content" id="tab_age" style="display: none">
     <table id="result_age_tab"></table>
     <div id="map"></div>
 </section>
-
 
 </body>
 <?=$footer?>
@@ -72,6 +99,5 @@
 <script rel="script" src="../js/ajax.js"></script>
 <script rel="script" src="../js/script.js"></script>
 <script rel="script" src="../js/tree_tab.js"></script>
-
 
 </html>
