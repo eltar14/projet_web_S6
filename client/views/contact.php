@@ -31,6 +31,24 @@
     <div>    <img style="max-width: 900px" src="../views/img/raul.jpg" alt="raùl">
     </div>
     <p>Voici raùl notre pigeon voyageur, pour nous contacter il faut lui demander. (il se peut qu'il vous demande des frais)</p>
+    <hr>
+    <div>
+        <p>Si vous voulez aller un peu plus vite : </p>
+        <ul>
+            <li>
+                <p><a href="mailto:antoine.le-boulch@isen-ouest.yncrea.fr">antoine.le-boulch@isen-ouest.yncrea.fr</a></p>
+
+            </li>
+            <li>
+                <p><a href="mailto:tom.lelievre@isen-ouest.yncrea.fr">tom.lelievre@isen-ouest.yncrea.fr</a></p>
+
+            </li>
+            <li>
+                <p><a href="mailto:nathan.simon@isen-ouest.yncrea.fr">nathan.simon@isen-ouest.yncrea.fr</a></p>
+
+            </li>
+        </ul>
+    </div>
 </section>
 
 

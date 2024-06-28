@@ -24,22 +24,23 @@
 
 <section id="intro" class="main_content">
     <h1>
-        Patrimoine arboré de la ville de Saint Quentin (02)
+        Patrimoine arboré de la ville de Saint Quentin
     </h1>
     <hr>
-    <h2>Introduction</h2>
-    <p>Bienvenue sur notre site web, fruit d'un projet étudiant de troisième année à l'ISEN Caen. Ce projet de trois semaines porte sur le patrimoine arboricole de la ville de Sainte-Quentin dans l'Aisne (02), intégrant diverses disciplines telles que le Big Data, l'IA et le développement web.</p>
+    <p>Bienvenue sur notre site web, fruit d'un projet étudiant de troisième année à l'<a href="https://isen-caen.fr/">ISEN Caen</a>. Ce projet de trois semaines porte sur le patrimoine arboré de la ville de Sainte-Quentin dans l'Aisne (02), intégrant diverses disciplines telles que le Big Data, l'IA et le développement web.</p>
 
     <p> En Big Data, nous avons nettoyé et préparé les données. Grâce à l'IA (machine learning), nous avons développé des prédictions pour l'âge des arbres et leur risque de déracinement en cas de tempête. Enfin, sur la partie web, nous avons créé ce site où vous pouvez exploiter toutes ces fonctionnalités.</p>
 
-    <p>    Sur notre site, vous pouvez accéder à toutes les données de notre base de données sur les arbres, trier par différentes caractéristiques et même ajouter de nouveaux arbres si vous êtes authentifié. Vous pouvez également prédire l'âge des arbres et identifier ceux susceptibles d'être déracinés. </p>
+    <p>    Sur notre site, vous pouvez accéder à toutes les données de notre base de données sur les arbres, trier et filtrer par différentes caractéristiques et même ajouter de nouveaux arbres si vous êtes authentifié. Vous pouvez également prédire l'âge des arbres. </p>
 
-    <p> Explorez notre site et découvrez notre travail sur le patrimoine arboricole de Sainte-Quentin! </p>
+    <p> Explorez notre site et découvrez notre travail sur le patrimoine arboré de Saint-Quentin! </p>
 </section>
 
 
 <section class="main_content">
-    <h2>Carte</h2>
+    <h2>Carte interactive du patrimoine arboré</h2>
+    <p>Découvrez avec cette l'intégralité du patrimoine arboré de la ville.</p>
+    <p>Pour avoir plus d'informations sur un arbre, il est possible de cliquer dessus.</p>
     <div id="map"></div>
 </section>
 
