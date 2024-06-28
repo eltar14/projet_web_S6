@@ -14,5 +14,4 @@
         unlink($tempFile);
         return $result;
     }
-
 ?>

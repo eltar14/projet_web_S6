@@ -288,7 +288,7 @@ function create_age_map(data){
             'Hauteur tronc : ' + data[i]["haut_tronc"] +'m<br>'+
             'Remarquable : ' + (parseInt(data[i]["remarquable"])?'Oui':'Non') +'<br>'+
             'Feuillage : ' + data[i]["feuillage"] +'<br>'+
-            'Stade dev : ' + data[i]["stadedev"] +'<br>'+
+            'Stade dev : ' + data[i]["fk_stadedev"] +'<br>'+
             'Secteur : ' + data[i]["clc_secteur"] +'<br>'+
             'Id arbre : ' + data[i]["id_arbre"] +'<br>'
         );
