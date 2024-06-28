@@ -373,7 +373,10 @@ function display_tab_age(tab) {
 
 function create_age_map(data){
     //TODO a appeler dans la callback du dessus
-
+    $('#map').remove()
+    let md = document.createElement('div');
+    md.id="map";
+    document.getElementById('tab_age').appendChild(md)
     var map = L.map('map').setView([49.846966079281266, 3.2874275441195704], 13);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
@@ -395,7 +398,12 @@ function create_age_map(data){
             'Feuillage : ' + data[i]["feuillage"] +'<br>'+
             'Stade dev : ' + data[i]["fk_stadedev"] +'<br>'+
             'Secteur : ' + data[i]["clc_secteur"] +'<br>'+
-            'Id arbre : ' + data[i]["id_arbre"] +'<br>'
+            'Id arbre : ' + data[i]["id_arbre"] +'<br>'+
+            'RandomForest : ' + Math.round(data[i]["age_estim_RandomForest"])  +'<br>'+
+            'DecisionTree : ' + Math.round(data[i]["age_estim_DecisionTree"])  +'<br>'+
+            'MultiLayerPercetron : ' + Math.round(data[i]["age_estim_MultiLayerPercetron"]) +'<br>'+
+            'GradientBoosting : ' + Math.round(data[i]["age_estim_GradientBoosting"]) +'<br>'
+
         );
     }
 
