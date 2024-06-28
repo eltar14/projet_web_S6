@@ -27,7 +27,7 @@
         Patrimoine arboré de la ville de Saint Quentin
     </h1>
     <hr>
-    <p>Bienvenue sur notre site web, fruit d'un projet étudiant de troisième année à l'<a href="https://isen-caen.fr/">ISEN Caen</a>. Ce projet de trois semaines porte sur le patrimoine arboré de la ville de Sainte-Quentin dans l'Aisne (02), intégrant diverses disciplines telles que le Big Data, l'IA et le développement web.</p>
+    <p>Bienvenue sur notre site web, fruit d'un projet étudiant de troisième année à l'<a href="https://isen-caen.fr/" target="_blank">ISEN Caen</a>. Ce projet de trois semaines porte sur le patrimoine arboré de la ville de Sainte-Quentin dans l'Aisne (02), intégrant diverses disciplines telles que le Big Data, l'IA et le développement web.</p>
 
     <p> En Big Data, nous avons nettoyé et préparé les données. Grâce à l'IA (machine learning), nous avons développé des prédictions pour l'âge des arbres et leur risque de déracinement en cas de tempête. Enfin, sur la partie web, nous avons créé ce site où vous pouvez exploiter toutes ces fonctionnalités.</p>
 
